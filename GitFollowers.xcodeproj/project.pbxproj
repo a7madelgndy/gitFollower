@@ -24,6 +24,7 @@
 		15C9E06B2D929495004EAE06 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06A2D929495004EAE06 /* Follower.swift */; };
 		15C9E06D2D9295EA004EAE06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06C2D9295EA004EAE06 /* User.swift */; };
 		15C9E0702D92AD0E004EAE06 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */; };
+		15C9E0732D92C1B9004EAE06 /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0722D92C1B9004EAE06 /* ErrorMessages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		15C9E06A2D929495004EAE06 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		15C9E06C2D9295EA004EAE06 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkManager.swift; sourceTree = "<group>"; };
+		15C9E0722D92C1B9004EAE06 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,13 +80,14 @@
 		15C9E03B2D901824004EAE06 /* GitFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				15C9E0712D92C191004EAE06 /* Uitilities  */,
 				15C9E06E2D92ACFA004EAE06 /* Managers  */,
 				15C9E0692D929487004EAE06 /* Model */,
 				15C9E0682D928E9E004EAE06 /* Support */,
 				15C9E0672D928E8C004EAE06 /* Extentions */,
 				15C9E0662D928E7D004EAE06 /* Screens */,
-				15C9E04A2D901826004EAE06 /* Info.plist */,
 				15C9E0652D928E5A004EAE06 /* Custom Views */,
+				15C9E04A2D901826004EAE06 /* Info.plist */,
 			);
 			path = GitFollowers;
 			sourceTree = "<group>";
@@ -146,6 +149,14 @@
 				15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */,
 			);
 			path = "Managers ";
+			sourceTree = "<group>";
+		};
+		15C9E0712D92C191004EAE06 /* Uitilities  */ = {
+			isa = PBXGroup;
+			children = (
+				15C9E0722D92C1B9004EAE06 /* ErrorMessages.swift */,
+			);
+			path = "Uitilities ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15C9E0732D92C1B9004EAE06 /* ErrorMessages.swift in Sources */,
 				15C9E0552D9173FF004EAE06 /* GFTextField.swift in Sources */,
 				15C9E0512D91627B004EAE06 /* FavoritesVC.swift in Sources */,
 				15C9E0642D927D5B004EAE06 /* UIViewController+Ext.swift in Sources */,
