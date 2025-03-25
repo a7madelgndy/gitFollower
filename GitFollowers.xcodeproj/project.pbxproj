@@ -21,6 +21,9 @@
 		15C9E05E2D926FA0004EAE06 /* GFBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E05D2D926FA0004EAE06 /* GFBodyLabel.swift */; };
 		15C9E0622D927052004EAE06 /* GFAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0612D927052004EAE06 /* GFAlertVC.swift */; };
 		15C9E0642D927D5B004EAE06 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0632D927D5B004EAE06 /* UIViewController+Ext.swift */; };
+		15C9E06B2D929495004EAE06 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06A2D929495004EAE06 /* Follower.swift */; };
+		15C9E06D2D9295EA004EAE06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06C2D9295EA004EAE06 /* User.swift */; };
+		15C9E0702D92AD0E004EAE06 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		15C9E05D2D926FA0004EAE06 /* GFBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFBodyLabel.swift; sourceTree = "<group>"; };
 		15C9E0612D927052004EAE06 /* GFAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertVC.swift; sourceTree = "<group>"; };
 		15C9E0632D927D5B004EAE06 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		15C9E06A2D929495004EAE06 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
+		15C9E06C2D9295EA004EAE06 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,9 +78,12 @@
 		15C9E03B2D901824004EAE06 /* GitFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				15C9E06E2D92ACFA004EAE06 /* Managers  */,
+				15C9E0692D929487004EAE06 /* Model */,
 				15C9E0682D928E9E004EAE06 /* Support */,
 				15C9E0672D928E8C004EAE06 /* Extentions */,
 				15C9E0662D928E7D004EAE06 /* Screens */,
+				15C9E04A2D901826004EAE06 /* Info.plist */,
 				15C9E0652D928E5A004EAE06 /* Custom Views */,
 			);
 			path = GitFollowers;
@@ -118,9 +127,25 @@
 				15C9E03E2D901824004EAE06 /* SceneDelegate.swift */,
 				15C9E0452D901826004EAE06 /* Assets.xcassets */,
 				15C9E0472D901826004EAE06 /* LaunchScreen.storyboard */,
-				15C9E04A2D901826004EAE06 /* Info.plist */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		15C9E0692D929487004EAE06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15C9E06A2D929495004EAE06 /* Follower.swift */,
+				15C9E06C2D9295EA004EAE06 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		15C9E06E2D92ACFA004EAE06 /* Managers  */ = {
+			isa = PBXGroup;
+			children = (
+				15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */,
+			);
+			path = "Managers ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,8 +223,11 @@
 				15C9E0642D927D5B004EAE06 /* UIViewController+Ext.swift in Sources */,
 				15C9E0412D901824004EAE06 /* SearchVC.swift in Sources */,
 				15C9E0532D916E68004EAE06 /* GfButton.swift in Sources */,
+				15C9E0702D92AD0E004EAE06 /* NetWorkManager.swift in Sources */,
 				15C9E0572D92627D004EAE06 /* FollowerListVC.swift in Sources */,
+				15C9E06D2D9295EA004EAE06 /* User.swift in Sources */,
 				15C9E0622D927052004EAE06 /* GFAlertVC.swift in Sources */,
+				15C9E06B2D929495004EAE06 /* Follower.swift in Sources */,
 				15C9E03D2D901824004EAE06 /* AppDelegate.swift in Sources */,
 				15C9E05B2D926D8F004EAE06 /* GFTitleLabel.swift in Sources */,
 				15C9E0592D9266C5004EAE06 /* String+Ext.swift in Sources */,
