@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetWorkManager {
+final class NetWorkManager {
     static let shared = NetWorkManager()
     private let baseUrl = "https://api.github.com/users/"
     private init() {}
@@ -24,7 +24,8 @@ class NetWorkManager {
                 completed(.failure(.unableToComplete))
                 return
             }
-            guard let response = response as? HTTPURLResponse , response.statusCode == 200 else {
+            
+            if let response = response as? HTTPURLResponse , response.statusCode == 200  {
                 completed(.failure(.invalidResponse))
                 return
             }
