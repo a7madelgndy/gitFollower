@@ -24,10 +24,12 @@ class FollowerCell: UICollectionViewCell {
     func set(follower: Follower){
         usernameLabel.text = follower.login
     }
+    
+    
     private func configure() {
         addSubview(avaterImageView)
         addSubview(usernameLabel)
-        
+        translatesAutoresizingMaskIntoConstraints = false
         let padding: CGFloat = 8
         //all the cell have a contenView
         NSLayoutConstraint.activate([
