@@ -24,7 +24,7 @@ extension UIViewController {
         ContainerView.backgroundColor = .systemBackground
         ContainerView.alpha = 0
         UIView.animate(withDuration: 0.3) {ContainerView.alpha = 0.8  }
-
+        
         let activiyIndicator = UIActivityIndicatorView(style: .large)
         ContainerView.addSubview(activiyIndicator)
         activiyIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +40,15 @@ extension UIViewController {
             ContainerView.removeFromSuperview()
             ContainerView = nil
         }
+    }
+    
+    func showEmptyStateView(with massage: String , in view : UIView) {
+        DispatchQueue.main.async {
+            let emtyStateView = GFEmtyStateView(massage: massage)
+            emtyStateView.frame = view.bounds
+            view.addSubview(emtyStateView)
+        }
 
     }
+    
 }
