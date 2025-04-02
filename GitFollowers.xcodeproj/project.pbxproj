@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1595CADD2D9D4C5900039C61 /* GFEmtyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595CADC2D9D4C5900039C61 /* GFEmtyStateView.swift */; };
+		1595CADF2D9D6DAB00039C61 /* UserInfoVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595CADE2D9D6DAB00039C61 /* UserInfoVc.swift */; };
 		15C9E03D2D901824004EAE06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E03C2D901824004EAE06 /* AppDelegate.swift */; };
 		15C9E03F2D901824004EAE06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E03E2D901824004EAE06 /* SceneDelegate.swift */; };
 		15C9E0412D901824004EAE06 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0402D901824004EAE06 /* SearchVC.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		1595CADC2D9D4C5900039C61 /* GFEmtyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmtyStateView.swift; sourceTree = "<group>"; };
+		1595CADE2D9D6DAB00039C61 /* UserInfoVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVc.swift; sourceTree = "<group>"; };
 		15C9E0392D901824004EAE06 /* GitFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15C9E03C2D901824004EAE06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		15C9E03E2D901824004EAE06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				15C9E0502D91627B004EAE06 /* FavoritesVC.swift */,
 				15C9E0562D92627D004EAE06 /* FollowerListVC.swift */,
 				15C9E0402D901824004EAE06 /* SearchVC.swift */,
+				1595CADE2D9D6DAB00039C61 /* UserInfoVc.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				15C9E0732D92C1B9004EAE06 /* ErrorMessages.swift in Sources */,
 				15C9E0552D9173FF004EAE06 /* GFTextField.swift in Sources */,
 				15C9E0512D91627B004EAE06 /* FavoritesVC.swift in Sources */,
+				1595CADF2D9D6DAB00039C61 /* UserInfoVc.swift in Sources */,
 				15C9E0642D927D5B004EAE06 /* UIViewController+Ext.swift in Sources */,
 				15C9E0412D901824004EAE06 /* SearchVC.swift in Sources */,
 				15C9E0752D92D18F004EAE06 /* GFAvatarImageView.swift in Sources */,

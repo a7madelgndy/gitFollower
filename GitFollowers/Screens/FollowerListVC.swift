@@ -14,8 +14,10 @@ class FollowerListVC: UIViewController {
     
     var username: String!
     var followers: [Follower] = []
+    var filtedFollowers :[Follower] = []
     var page : Int = 1
     var hasMoreFollowers = true
+    var isSearching = false
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -23,6 +25,7 @@ class FollowerListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configerControllerView()
+        configerSearchController()
         configureCollectionView()
         ConfigureDataSouce()
         getFollowers(username: username, page: page)
@@ -33,13 +36,20 @@ class FollowerListVC: UIViewController {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
+
     func configerControllerView() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    
+    func configerSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate   = self
+        searchController.searchBar.placeholder = "Search For a username"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+    }
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view) )
         collectionView.delegate = self
@@ -62,13 +72,13 @@ class FollowerListVC: UIViewController {
                 }
                 self.followers.append(contentsOf: followers)
                 if followers.isEmpty {
-                    let massage = "This user has no Followers , go follow them 😃 "
+                    let massage = "This user has no Followers , go follow them 😃"
                     DispatchQueue.main.async{
                         self.showEmptyStateView(with: massage, in: self.view)
                     }
                     return
                 }
-                self.updataData()
+                self.updataData(on: followers)
                 
             case .failure(let error):
                 self.presentGFAlerONMainThread(title: "Bad stuff happend", message: error.rawValue, buttonTile: "ok")
@@ -85,7 +95,7 @@ class FollowerListVC: UIViewController {
             return cell
         }
     }
-    func updataData(){
+    func updataData(on followers:[Follower]){
       var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
       snapshot.appendSections([.main])
       snapshot.appendItems(followers)
@@ -104,7 +114,31 @@ extension FollowerListVC: UICollectionViewDelegate{
         if offsetY > contentHight - height {
             guard  hasMoreFollowers else  {return}
             page += 1
-            getFollowers(username: username, page: page  )
+            getFollowers(username: username, page: page)
         }
+        
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let activArray = isSearching ? filtedFollowers : followers
+        let follower = activArray[indexPath.item]
+        let userInfoVc = UserInfoVc()
+        userInfoVc.username = follower.login
+        let navController = UINavigationController(rootViewController: userInfoVc)
+        present(navController, animated: true)
+    }
+}
+
+extension FollowerListVC : UISearchResultsUpdating , UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text ,  !filter.isEmpty else {return}
+        isSearching.toggle()
+        filtedFollowers = followers.filter{$0.login.lowercased().contains(filter.lowercased())}
+        updataData(on: filtedFollowers)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching.toggle()
+        updataData(on: followers)
+    }
+    
 }
