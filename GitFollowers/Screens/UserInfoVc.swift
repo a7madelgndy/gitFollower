@@ -10,15 +10,23 @@ import UIKit
 class UserInfoVc: UIViewController {
     
     let headerView = UIView()
+    let itemViewOne = UIView()
+    let itemviewTwo = UIView()
+    var itemViews : [UIView] = [ ]
     
     var  username: String?
     var  user: User?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismisView))
-        navigationItem.rightBarButtonItem = button
-        
+        configerViewController()
+        layouUI()
+        getUserInfo()
+    }
+    
+    
+    func getUserInfo() {
         NetWorkManager.shared.getUser(for: username ?? "caioiglesias") { [weak self] result in
             guard let self = self  else {return}
             switch result {
@@ -32,17 +40,44 @@ class UserInfoVc: UIViewController {
                 print(error)
             }
         }
-        layouUI()
     }
     
+    
+    func configerViewController() {
+        view.backgroundColor = .systemBackground
+        let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismisView))
+        navigationItem.rightBarButtonItem = button
+    }
+    
+    
     func layouUI() {
-        view.addSubview(headerView)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+        let padding:CGFloat = 20
+        let itemHeight:CGFloat = 140
+        itemViews = [headerView, itemviewTwo,itemViewOne]
+        
+        for itemView in itemViews {
+            view.addSubview(itemView)
+            itemView.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                itemView.leadingAnchor.constraint(equalTo: view.leadingAnchor ,constant: padding),
+                itemView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -padding)
+            ])
+        }
+        itemviewTwo.backgroundColor = .red
+        itemViewOne.backgroundColor = .black
+        itemviewTwo.layer.cornerRadius = 20
+        itemViewOne.layer.cornerRadius = 20
+        
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180)
+            headerView.heightAnchor.constraint(equalToConstant: 180),
+            
+            itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor , constant: padding),
+            itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            itemviewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor , constant: padding),
+            itemviewTwo.heightAnchor.constraint(equalToConstant: itemHeight)
         ])
         
     }
