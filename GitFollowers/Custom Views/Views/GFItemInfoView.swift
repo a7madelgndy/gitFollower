@@ -13,12 +13,14 @@ enum ItemInfoType {
 
 
 class GFItemInfoView: UIView {
-    let SymbolImageView = UIImageView()
+    let symbolImageView = UIImageView()
     let titleLable = GFTitleLabel(textAlignment: .left, fontsize: 20)
     let countLabel = GFTitleLabel(textAlignment: .center, fontsize: 20)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configuer()
+    
     }
     
     required init?(coder: NSCoder) {
@@ -26,49 +28,49 @@ class GFItemInfoView: UIView {
     }
     
     private func configuer() {
-        addSubview(SymbolImageView)
+        addSubview(symbolImageView)
         addSubview(titleLable)
         addSubview(countLabel)
         
-        SymbolImageView.translatesAutoresizingMaskIntoConstraints = false
-        SymbolImageView.tintColor = .secondaryLabel
-        SymbolImageView.contentMode = .scaleAspectFit
+        symbolImageView.translatesAutoresizingMaskIntoConstraints = false
+        symbolImageView.tintColor = .secondaryLabel
+        symbolImageView.contentMode = .scaleToFill
         NSLayoutConstraint.activate([
-            SymbolImageView.topAnchor.constraint(equalTo: topAnchor),
-            SymbolImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            SymbolImageView.widthAnchor.constraint(equalToConstant: 20),
-            SymbolImageView.heightAnchor.constraint(equalToConstant: 20),
+            symbolImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            symbolImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            symbolImageView.widthAnchor.constraint(equalToConstant: 20),
+            symbolImageView.heightAnchor.constraint(equalToConstant: 20),
             
-            titleLable.leadingAnchor.constraint(equalTo: SymbolImageView.trailingAnchor ,constant: 12),
-            titleLable.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleLable.centerYAnchor.constraint(equalTo: SymbolImageView.centerYAnchor),
-            titleLable.heightAnchor.constraint(equalToConstant: 80),
+            titleLable.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor ,constant: 12),
+            titleLable.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            titleLable.centerYAnchor.constraint(equalTo: symbolImageView.centerYAnchor),
+            titleLable.heightAnchor.constraint(equalToConstant: 20),
             
-            countLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            countLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            countLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            countLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            countLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             countLabel.heightAnchor.constraint(equalToConstant: 18)
             
         ])
     }
  
  
-    private func setSymbolImageView(itemInfoType : ItemInfoType , withCount count: Int){
+      func set(itemInfoType : ItemInfoType , withCount count: Int){
         countLabel.text = String(count)
         switch itemInfoType {
         case .repos:
-            SymbolImageView.image = UIImage(systemName: SFSymbols.repos)
+            symbolImageView.image = UIImage(systemName: SFSymbols.repos)
             titleLable.text = "Pulic Repos"
         case .gists:
-            SymbolImageView.image = UIImage(systemName: SFSymbols.gists)
+            symbolImageView.image = UIImage(systemName: SFSymbols.gists)
             titleLable.text = "Public Gits"
 
         case .followers:
-            SymbolImageView.image = UIImage(systemName: SFSymbols.followers)
+            symbolImageView.image = UIImage(systemName: SFSymbols.followers)
             titleLable.text = "Followers"
 
         case .following:
-            SymbolImageView.image = UIImage(systemName: SFSymbols.following)
+            symbolImageView.image = UIImage(systemName: SFSymbols.following)
             titleLable.text = "Following"
         }
     }

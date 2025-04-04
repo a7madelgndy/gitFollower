@@ -23,6 +23,8 @@ class UserInfoVc: UIViewController {
         configerViewController()
         layouUI()
         getUserInfo()
+        itemViewOne.backgroundColor = .secondaryLabel
+        itemviewTwo.backgroundColor = .secondaryLabel
     }
     
     
@@ -33,7 +35,11 @@ class UserInfoVc: UIViewController {
                 
             case .success(let user):
                 DispatchQueue.main.async{
-                    self.add(childVc: GFUserInfoHeaderVcViewController(user: user), to: self.headerView)}
+                    self.add(childVc: GFUserInfoHeaderVC(user: user), to: self.headerView)
+                    self.add(childVc: GFRepoItemVC(user: user), to: self.itemViewOne)
+                    self.add(childVc: GFFollowerItemVC(user: user), to: self.itemviewTwo)
+                 
+                }
                 
             case .failure(let error):
                 self.presentGFAlerONMainThread(title: "something went wrong ", message: error.rawValue, buttonTile: "ok")
@@ -53,7 +59,7 @@ class UserInfoVc: UIViewController {
     func layouUI() {
         let padding:CGFloat = 20
         let itemHeight:CGFloat = 140
-        itemViews = [headerView, itemviewTwo,itemViewOne]
+        itemViews = [headerView, itemViewOne, itemviewTwo]
         
         for itemView in itemViews {
             view.addSubview(itemView)
@@ -64,8 +70,6 @@ class UserInfoVc: UIViewController {
                 itemView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -padding)
             ])
         }
-        itemviewTwo.backgroundColor = .red
-        itemViewOne.backgroundColor = .black
         itemviewTwo.layer.cornerRadius = 20
         itemViewOne.layer.cornerRadius = 20
         
