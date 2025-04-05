@@ -13,9 +13,11 @@ class UserInfoVc: UIViewController {
     let itemViewOne = UIView()
     let itemviewTwo = UIView()
     var itemViews : [UIView] = [ ]
+    var dataLable = GFBodyLabel(textAlignment: .center)
     
     var  username: String?
     var  user: User?
+    var UserCreatedAt = String()
     
     
     override func viewDidLoad() {
@@ -25,6 +27,9 @@ class UserInfoVc: UIViewController {
         getUserInfo()
         itemViewOne.backgroundColor = .secondaryLabel
         itemviewTwo.backgroundColor = .secondaryLabel
+        
+
+
     }
     
     
@@ -38,6 +43,9 @@ class UserInfoVc: UIViewController {
                     self.add(childVc: GFUserInfoHeaderVC(user: user), to: self.headerView)
                     self.add(childVc: GFRepoItemVC(user: user), to: self.itemViewOne)
                     self.add(childVc: GFFollowerItemVC(user: user), to: self.itemviewTwo)
+                    //MARK: datalabel
+                    self.UserCreatedAt =  user.created_at.convertToDisplayFormat()
+                    self.dataLable.text = self.UserCreatedAt
                  
                 }
                 
@@ -59,7 +67,7 @@ class UserInfoVc: UIViewController {
     func layouUI() {
         let padding:CGFloat = 20
         let itemHeight:CGFloat = 140
-        itemViews = [headerView, itemViewOne, itemviewTwo]
+        itemViews = [headerView, itemViewOne, itemviewTwo ,dataLable]
         
         for itemView in itemViews {
             view.addSubview(itemView)
@@ -81,7 +89,10 @@ class UserInfoVc: UIViewController {
             itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight),
             
             itemviewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor , constant: padding),
-            itemviewTwo.heightAnchor.constraint(equalToConstant: itemHeight)
+            itemviewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            dataLable.topAnchor.constraint(equalTo: itemviewTwo.bottomAnchor, constant: padding),
+            dataLable.heightAnchor.constraint(equalToConstant: 23)
         ])
         
     }

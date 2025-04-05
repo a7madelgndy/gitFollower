@@ -37,6 +37,7 @@
 		15C9E0752D92D18F004EAE06 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0742D92D18F004EAE06 /* GFAvatarImageView.swift */; };
 		15C9E0782D92D2A0004EAE06 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0772D92D29F004EAE06 /* FollowerCell.swift */; };
 		15C9E07B2D954DED004EAE06 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E07A2D954DED004EAE06 /* UIHelper.swift */; };
+		15E110B12DA1319D004DF12E /* Date+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E110B02DA1319D004DF12E /* Date+EXT.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		15C9E0742D92D18F004EAE06 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		15C9E0772D92D29F004EAE06 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		15C9E07A2D954DED004EAE06 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		15E110B02DA1319D004DF12E /* Date+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+EXT.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 			children = (
 				15C9E0582D9266C5004EAE06 /* String+Ext.swift */,
 				15C9E0632D927D5B004EAE06 /* UIViewController+Ext.swift */,
+				15E110B02DA1319D004DF12E /* Date+EXT.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				1595CAE52D9EAAFA00039C61 /* SFSymbols.swift in Sources */,
 				15C9E0592D9266C5004EAE06 /* String+Ext.swift in Sources */,
 				1595CAE72D9EE3C300039C61 /* GFItemInfoView.swift in Sources */,
+				15E110B12DA1319D004DF12E /* Date+EXT.swift in Sources */,
 				15C9E03F2D901824004EAE06 /* SceneDelegate.swift in Sources */,
 				15C9E05E2D926FA0004EAE06 /* GFBodyLabel.swift in Sources */,
 			);
