@@ -26,6 +26,7 @@ class UserInfoVc: UIViewController {
     var  user: User?
     var UserCreatedAt = String()
     
+    weak var delegate: FollowerListDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +35,6 @@ class UserInfoVc: UIViewController {
         getUserInfo()
         itemViewOne.backgroundColor = .secondaryLabel
         itemviewTwo.backgroundColor = .secondaryLabel
-        
-
-
     }
     
     
@@ -64,7 +62,6 @@ class UserInfoVc: UIViewController {
         
         let followerItemVC = GFFollowerItemVC(user: user)
         followerItemVC.delegate = self
-        
         
         self.add(childVc: userInfoHeader, to: self.headerView)
         self.add(childVc: repoItemVc , to: self.itemViewOne)
@@ -140,7 +137,8 @@ extension UserInfoVc: ActionButtonDelegete {
     }
     
     func DidTappedGetFollowers(for user: User) {
-        print("follower button tapped")
+        dismiss(animated: true)
+        delegate.didFollowertapped(with: user.login)
     }
 
 }

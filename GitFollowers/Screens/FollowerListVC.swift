@@ -7,8 +7,11 @@
 
 import UIKit
 
+protocol FollowerListDelegate: AnyObject {
+    func didFollowertapped(with userusername : String)
+}
+
 class FollowerListVC: UIViewController {
-    
     
     enum Section {case main}
     
@@ -29,7 +32,6 @@ class FollowerListVC: UIViewController {
         configureCollectionView()
         ConfigureDataSouce()
         getFollowers(username: username, page: page)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,18 +69,20 @@ class FollowerListVC: UIViewController {
             self.dismissLoadingView()
             switch result {
             case .success(let followers):
-                if followers.count > 50 {
+                if followers.count < 10 {
                     hasMoreFollowers = false
                 }
-                self.followers.append(contentsOf: followers)
+                self.followers += followers
+                
                 if followers.isEmpty {
+                    hasMoreFollowers = false
                     let massage = "This user has no Followers , go follow them 😃"
                     DispatchQueue.main.async{
                         self.showEmptyStateView(with: massage, in: self.view)
                     }
                     return
                 }
-                self.updataData(on: followers)
+                self.updataData(on: self.followers)
                 
             case .failure(let error):
                 self.presentGFAlerONMainThread(title: "Bad stuff happend", message: error.rawValue, buttonTile: "ok")
@@ -123,6 +127,7 @@ extension FollowerListVC: UICollectionViewDelegate{
         let follower = activArray[indexPath.item]
         let userInfoVc = UserInfoVc()
         userInfoVc.username = follower.login
+        userInfoVc.delegate = self 
         let navController = UINavigationController(rootViewController: userInfoVc)
         present(navController, animated: true)
     }
@@ -140,5 +145,21 @@ extension FollowerListVC : UISearchResultsUpdating , UISearchBarDelegate {
         isSearching.toggle()
         updataData(on: followers)
     }
+    
+}
+
+extension FollowerListVC : FollowerListDelegate {
+    
+    func didFollowertapped(with username: String) {
+        self.username = username
+        self.title = username
+        guard  hasMoreFollowers else  {return}
+        page = 1
+        followers.removeAll()
+        filtedFollowers.removeAll()
+        collectionView.setContentOffset(.zero, animated: true)
+        getFollowers(username: username, page: page)
+    }
+    
     
 }

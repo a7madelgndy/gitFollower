@@ -13,9 +13,10 @@ class GFItemInfoVc: UIViewController  {
     let itemInfoViewTwo = GFItemInfoView()
     let actionButon = GfButton()
 
-    weak var delegate: ActionButtonDelegete?
     var user:User!
     
+    weak var delegate: ActionButtonDelegete?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configerControllerView()
