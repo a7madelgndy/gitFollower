@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SafariServices
+
 fileprivate var ContainerView : UIView!
 extension UIViewController {
     func presentGFAlerONMainThread(title: String, message: String , buttonTile : String) {
@@ -16,6 +18,14 @@ extension UIViewController {
             self.present(alertVC , animated: true)
         }
     }
+    
+    
+    func pressenSafrieVC(with url : URL){
+        let safariVc = SFSafariViewController(url: url)
+        safariVc.preferredControlTintColor = .systemGreen
+        present(safariVc, animated: true)
+    }
+    
     
     func showLoadingView() {
         ContainerView  = UIView(frame: view.bounds)

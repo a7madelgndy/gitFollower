@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import SafariServices
+
+protocol ActionButtonDelegete: AnyObject{
+    func didTappedGitHubProfile(for user: User)
+    func DidTappedGetFollowers(for user: User)
+}
+
 
 class UserInfoVc: UIViewController {
     
@@ -39,15 +46,7 @@ class UserInfoVc: UIViewController {
             switch result {
                 
             case .success(let user):
-                DispatchQueue.main.async{
-                    self.add(childVc: GFUserInfoHeaderVC(user: user), to: self.headerView)
-                    self.add(childVc: GFRepoItemVC(user: user), to: self.itemViewOne)
-                    self.add(childVc: GFFollowerItemVC(user: user), to: self.itemviewTwo)
-                    //MARK: datalabel
-                    self.UserCreatedAt =  user.created_at.convertToDisplayFormat()
-                    self.dataLable.text = self.UserCreatedAt
-                 
-                }
+                DispatchQueue.main.async{self.configureUIElemtets(user: user)}
                 
             case .failure(let error):
                 self.presentGFAlerONMainThread(title: "something went wrong ", message: error.rawValue, buttonTile: "ok")
@@ -57,14 +56,33 @@ class UserInfoVc: UIViewController {
     }
     
     
-    func configerViewController() {
+    private func configureUIElemtets(user : User) {
+        let userInfoHeader = GFUserInfoHeaderVC(user: user)
+        
+        let repoItemVc = GFRepoItemVC(user: user)
+        repoItemVc.delegate = self
+        
+        let followerItemVC = GFFollowerItemVC(user: user)
+        followerItemVC.delegate = self
+        
+        
+        self.add(childVc: userInfoHeader, to: self.headerView)
+        self.add(childVc: repoItemVc , to: self.itemViewOne)
+        self.add(childVc: followerItemVC ,to: self.itemviewTwo)
+        
+        self.UserCreatedAt =  user.created_at.convertToDisplayFormat()
+        self.dataLable.text = self.UserCreatedAt
+    }
+    
+    
+    private func configerViewController() {
         view.backgroundColor = .systemBackground
         let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismisView))
         navigationItem.rightBarButtonItem = button
     }
     
     
-    func layouUI() {
+    private func layouUI() {
         let padding:CGFloat = 20
         let itemHeight:CGFloat = 140
         itemViews = [headerView, itemViewOne, itemviewTwo ,dataLable]
@@ -97,7 +115,7 @@ class UserInfoVc: UIViewController {
         
     }
     
-    func add(childVc : UIViewController , to containerView : UIView) {
+    private func add(childVc : UIViewController , to containerView : UIView) {
      addChild(childVc)
      containerView.addSubview(childVc.view)
      childVc.view.frame = containerView.bounds
@@ -110,3 +128,22 @@ class UserInfoVc: UIViewController {
 
 
 }
+
+extension UserInfoVc: ActionButtonDelegete {
+    func didTappedGitHubProfile(for user: User) {
+        guard let url = URL(string: user.html_url) else {
+            presentGFAlerONMainThread(
+                title: "Invalid URL", message: "The url attaced to This user is invalid", buttonTile: "ok")
+            return
+        }
+        pressenSafrieVC(with: url)
+    }
+    
+    func DidTappedGetFollowers(for user: User) {
+        print("follower button tapped")
+    }
+
+}
+    
+    
+

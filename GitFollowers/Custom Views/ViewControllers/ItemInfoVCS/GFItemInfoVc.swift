@@ -7,20 +7,21 @@
 
 import UIKit
 
-class GFItemInfoVc: UIViewController {
+class GFItemInfoVc: UIViewController  {
     let stackView  = UIStackView()
     let itemInfoViewOne = GFItemInfoView()
     let itemInfoViewTwo = GFItemInfoView()
     let actionButon = GfButton()
 
-    var user:User?
+    weak var delegate: ActionButtonDelegete?
+    var user:User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configerControllerView()
         configureStackView()
         LayouUI()
-   
+        configureActionButton()
     }
     
     init(user: User!) {
@@ -65,4 +66,12 @@ class GFItemInfoVc: UIViewController {
         ])
         
     }
+    private func configureActionButton() {
+        actionButon.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+    }
+
+    @objc func actionButtonTapped() {
+        
+    }
 }
+
