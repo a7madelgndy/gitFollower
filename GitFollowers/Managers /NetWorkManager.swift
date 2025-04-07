@@ -13,7 +13,7 @@ final class NetWorkManager {
     private let baseUrl = "https://api.github.com/users/"
     private init() {}
     
-    func getFollowers(for username: String , page: Int , completed: @escaping(Result<[Follower] , ErrorMessages>) -> Void) {
+    func getFollowers(for username: String , page: Int , completed: @escaping(Result<[Follower] , GFError>) -> Void) {
         let endpoint = baseUrl + "\(username)/followers?per_page=10&page=\(page)"
   
         guard let url = URL(string: endpoint) else {
@@ -45,7 +45,7 @@ final class NetWorkManager {
         
     }
     
-    func getUser(for username: String , completed: @escaping(Result<User , ErrorMessages>) -> Void) {
+    func getUser(for username: String , completed: @escaping(Result<User , GFError>) -> Void) {
         let endpoint = baseUrl + "\(username)"
         print(endpoint)
   

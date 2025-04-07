@@ -33,11 +33,12 @@
 		15C9E06B2D929495004EAE06 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06A2D929495004EAE06 /* Follower.swift */; };
 		15C9E06D2D9295EA004EAE06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06C2D9295EA004EAE06 /* User.swift */; };
 		15C9E0702D92AD0E004EAE06 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */; };
-		15C9E0732D92C1B9004EAE06 /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0722D92C1B9004EAE06 /* ErrorMessages.swift */; };
+		15C9E0732D92C1B9004EAE06 /* GFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0722D92C1B9004EAE06 /* GFError.swift */; };
 		15C9E0752D92D18F004EAE06 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0742D92D18F004EAE06 /* GFAvatarImageView.swift */; };
 		15C9E0782D92D2A0004EAE06 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E0772D92D29F004EAE06 /* FollowerCell.swift */; };
 		15C9E07B2D954DED004EAE06 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E07A2D954DED004EAE06 /* UIHelper.swift */; };
 		15E110B12DA1319D004DF12E /* Date+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E110B02DA1319D004DF12E /* Date+EXT.swift */; };
+		15E110B32DA3C12C004DF12E /* PresistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E110B22DA3C12C004DF12E /* PresistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,11 +70,12 @@
 		15C9E06A2D929495004EAE06 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		15C9E06C2D9295EA004EAE06 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkManager.swift; sourceTree = "<group>"; };
-		15C9E0722D92C1B9004EAE06 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
+		15C9E0722D92C1B9004EAE06 /* GFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFError.swift; sourceTree = "<group>"; };
 		15C9E0742D92D18F004EAE06 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		15C9E0772D92D29F004EAE06 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		15C9E07A2D954DED004EAE06 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		15E110B02DA1319D004DF12E /* Date+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+EXT.swift"; sourceTree = "<group>"; };
+		15E110B22DA3C12C004DF12E /* PresistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				15C9E06F2D92AD0E004EAE06 /* NetWorkManager.swift */,
+				15E110B22DA3C12C004DF12E /* PresistenceManager.swift */,
 			);
 			path = "Managers ";
 			sourceTree = "<group>";
@@ -248,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				15C9E0792D954DC7004EAE06 /* UIHelper */,
-				15C9E0722D92C1B9004EAE06 /* ErrorMessages.swift */,
+				15C9E0722D92C1B9004EAE06 /* GFError.swift */,
 				1595CAE42D9EAAFA00039C61 /* SFSymbols.swift */,
 			);
 			path = "Uitilities ";
@@ -341,7 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1595CADD2D9D4C5900039C61 /* GFEmtyStateView.swift in Sources */,
-				15C9E0732D92C1B9004EAE06 /* ErrorMessages.swift in Sources */,
+				15C9E0732D92C1B9004EAE06 /* GFError.swift in Sources */,
 				15C9E0552D9173FF004EAE06 /* GFTextField.swift in Sources */,
 				15C9E0512D91627B004EAE06 /* FavoritesVC.swift in Sources */,
 				1595CADF2D9D6DAB00039C61 /* UserInfoVc.swift in Sources */,
@@ -369,6 +372,7 @@
 				15E110B12DA1319D004DF12E /* Date+EXT.swift in Sources */,
 				15C9E03F2D901824004EAE06 /* SceneDelegate.swift in Sources */,
 				15C9E05E2D926FA0004EAE06 /* GFBodyLabel.swift in Sources */,
+				15E110B32DA3C12C004DF12E /* PresistenceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,7 +522,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,7 +553,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
