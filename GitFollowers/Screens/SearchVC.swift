@@ -69,7 +69,8 @@ class SearchVC: UIViewController {
     func configureTextFiled() {
         view.addSubview(usernameTextFiled)
         usernameTextFiled.delegate = self
-        
+        #warning("debging")
+        usernameTextFiled.text = "sallen0400"
         NSLayoutConstraint.activate([
             usernameTextFiled.topAnchor.constraint(equalTo: logoImageView.bottomAnchor ,constant:  80),
             usernameTextFiled.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),

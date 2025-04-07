@@ -19,7 +19,7 @@ enum PresistenceManager {
         static let favorites = "favorites"
     }
     
-    static func updateWith(follower: Follower ,actionType: PresistenceActionType, completed : @escaping(GFError) -> Void) {
+    static func updateWith(follower: Follower ,actionType: PresistenceActionType, completed : @escaping(GFError?) -> Void) {
         retriveFavorites { resulte in
             switch resulte {
             case .success(let favorites):
@@ -33,12 +33,11 @@ enum PresistenceManager {
                         return
                     }
                     retrivedFavorites.append(follower)
-                    defulats.set(retrivedFavorites, forKey: keys.favorites)
-                    
+ 
                 case .reomve:
                     retrivedFavorites.removeAll { $0.login == follower.login}
                 }
-                break
+                completed(save(favorites: retrivedFavorites))
             case .failure(let error ):
                 completed(error)
             }
@@ -54,8 +53,7 @@ enum PresistenceManager {
         
         do {
            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let favorites = try decoder.decode([Follower].self, from: favorites)
+          let favorites = try decoder.decode([Follower].self, from: favorites)
             completed(.success(favorites) )
         }catch {
             completed(.failure(.unabelToFavorie))

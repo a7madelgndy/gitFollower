@@ -112,10 +112,33 @@ class FollowerListVC: UIViewController {
     }
   //MARK: Selectors
     @objc func addButtonTapped() {
-        print("hello")
+        NetWorkManager.shared.getUser(for: username) { [weak self] result in
+            guard let self = self else {return}
+            
+            switch result {
+            case .success(let user):
+                let follower = Follower(login: user.login, avatarUrl: user.avatar_url)
+                
+                PresistenceManager.updateWith(follower: follower, actionType: .add) { [weak self] error in
+                    guard let self = self else {return}
+
+                    guard let error = error else {
+                        self.presentGFAlerONMainThread(title: "Success! ", message: "you have Successfuly add this user to the favoite list 😁", buttonTile: "Horray🎉")
+                        return
+                    }
+                    self.presentGFAlerONMainThread(title:  "some thing Went Wrong", message: error.rawValue, buttonTile: "okay")
+                }
+                break
+            case .failure(let error):
+                self.presentGFAlerONMainThread(title: "some thing Went Wrong", message: error.rawValue, buttonTile: "ok")
+                break
+            }
+        }
     }
 }
 
+
+//MARK: Extension
 extension FollowerListVC: UICollectionViewDelegate{
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
