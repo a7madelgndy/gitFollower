@@ -13,50 +13,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
        guard let  windowScene = (scene as? UIWindowScene) else { return }
- 
+        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController =  createTabbar()
+        window?.rootViewController =  GFTabBarController()
         window?.makeKeyAndVisible()
         ConfigureNavigationBar()
     }
-    func createFavoritesNC() -> UINavigationController {
-        let favoritelistVC =  FavoritesVC()
-        favoritelistVC.title = "Favorites"
-        favoritelistVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-        
-        return UINavigationController(rootViewController: favoritelistVC)
-    }
-    
-    func searchNC() ->UINavigationController {
-        let searchVC = SearchVC()
-        searchVC.title = "Search"
-        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-        return UINavigationController(rootViewController: searchVC)
-    }
-    
-    func createTabbar() -> UITabBarController {
-        let tabbar = UITabBarController()
-        tabbar.viewControllers = [searchNC() , createFavoritesNC()]
-        UITabBar.appearance().tintColor = .systemGreen
-        return tabbar
-    }
+  
     func ConfigureNavigationBar() {
         UINavigationBar.appearance().tintColor = .systemGreen
     }
 
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
-    }
+    func sceneDidDisconnect(_ scene: UIScene) { }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+         
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

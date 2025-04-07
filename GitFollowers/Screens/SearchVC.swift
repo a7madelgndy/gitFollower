@@ -12,6 +12,8 @@ class SearchVC: UIViewController {
     let usernameTextFiled  = GFTextField()
     let callToActionButton = GfButton(backgroundColor: .systemGreen, title: "Get Followers")
     
+    var logoImageTopConstrians: NSLayoutConstraint!
+    
     var isUserNameEntered: Bool {
 
         return  !(usernameTextFiled.text?.isEmpty ?? true)
@@ -34,12 +36,12 @@ class SearchVC: UIViewController {
     }
     
     func createDismiskeyboardTapGesture() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
     @objc func dismissKeyboard(){
-        view.endEditing(true)
+            view.endEditing(true)
     }
     
     
@@ -53,17 +55,23 @@ class SearchVC: UIViewController {
         followerListVC.title = usernameTextFiled.text
         navigationController?.pushViewController(followerListVC, animated: true)
     }
+    
+    
     func configureLogoImage() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "gh-logo")
+        logoImageView.image = Images.ghLogo
         
+        let isSmallScreenDevice =  DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed || DeviceTypes.isiPhoneSE2ndAnd3rdGen
+        
+        let TopConstrianConstant: CGFloat = isSmallScreenDevice ? 20 : 80
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: TopConstrianConstant),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 200),
             logoImageView.widthAnchor.constraint(equalToConstant: 200)
         ])
+        print(DeviceTypes.isiPhoneSE)
     }
     
     func configureTextFiled() {
@@ -71,6 +79,7 @@ class SearchVC: UIViewController {
         usernameTextFiled.delegate = self
         #warning("debging")
         usernameTextFiled.text = "sallen0400"
+        
         NSLayoutConstraint.activate([
             usernameTextFiled.topAnchor.constraint(equalTo: logoImageView.bottomAnchor ,constant:  80),
             usernameTextFiled.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
