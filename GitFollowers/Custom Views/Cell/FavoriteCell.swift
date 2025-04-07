@@ -1,5 +1,5 @@
 //
-//  FavoriteCellTableViewCell.swift
+//  FavoriteCell.swift
 //  GitFollowers
 //
 //  Created by Ahmed El Gndy on 07/04/2025.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoriteCellTableViewCell: UITableViewCell {
+class FavoriteCell: UITableViewCell {
     static let reuseIdentifier = "favoriteCell"
     private let avaterImageView = GFAvatarImageView(frame: .zero)
     private let usernameLabel   = GFTitleLabel(textAlignment: .left, fontsize: 28)
@@ -21,9 +21,9 @@ class FavoriteCellTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(follower: Follower){
-        usernameLabel.text = follower.login
-        avaterImageView.downloadImage(from: follower.avatarUrl)
+    func set(favorite: Follower){
+        usernameLabel.text = favorite.login
+        avaterImageView.downloadImage(from: favorite.avatarUrl)
     }
     
     private func configure() {
@@ -34,18 +34,16 @@ class FavoriteCellTableViewCell: UITableViewCell {
     
         let padding: CGFloat = 12
         
-        translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             avaterImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             avaterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant:  padding),
             avaterImageView.widthAnchor.constraint(equalToConstant: 80),
-            avaterImageView.widthAnchor.constraint(equalToConstant: 80),
+            avaterImageView.heightAnchor.constraint(equalToConstant: 80),
             
             usernameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            avaterImageView.leadingAnchor.constraint(equalTo: avaterImageView.leadingAnchor, constant: padding),
-            avaterImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor , constant: -padding),
-            avaterImageView.heightAnchor.constraint(equalToConstant: 40)
-            
+            usernameLabel.leadingAnchor.constraint(equalTo: avaterImageView.trailingAnchor, constant: padding),
+            usernameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor , constant: -padding),
+            usernameLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 }

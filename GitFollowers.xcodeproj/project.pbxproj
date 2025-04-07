@@ -39,7 +39,7 @@
 		15C9E07B2D954DED004EAE06 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9E07A2D954DED004EAE06 /* UIHelper.swift */; };
 		15E110B12DA1319D004DF12E /* Date+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E110B02DA1319D004DF12E /* Date+EXT.swift */; };
 		15E110B32DA3C12C004DF12E /* PresistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E110B22DA3C12C004DF12E /* PresistenceManager.swift */; };
-		15E110B52DA3EE38004DF12E /* FavoriteCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E110B42DA3EE38004DF12E /* FavoriteCellTableViewCell.swift */; };
+		15E110B52DA3EE38004DF12E /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E110B42DA3EE38004DF12E /* FavoriteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,7 +77,7 @@
 		15C9E07A2D954DED004EAE06 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		15E110B02DA1319D004DF12E /* Date+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+EXT.swift"; sourceTree = "<group>"; };
 		15E110B22DA3C12C004DF12E /* PresistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresistenceManager.swift; sourceTree = "<group>"; };
-		15E110B42DA3EE38004DF12E /* FavoriteCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCellTableViewCell.swift; sourceTree = "<group>"; };
+		15E110B42DA3EE38004DF12E /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				15C9E0772D92D29F004EAE06 /* FollowerCell.swift */,
-				15E110B42DA3EE38004DF12E /* FavoriteCellTableViewCell.swift */,
+				15E110B42DA3EE38004DF12E /* FavoriteCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -346,7 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15E110B52DA3EE38004DF12E /* FavoriteCellTableViewCell.swift in Sources */,
+				15E110B52DA3EE38004DF12E /* FavoriteCell.swift in Sources */,
 				1595CADD2D9D4C5900039C61 /* GFEmtyStateView.swift in Sources */,
 				15C9E0732D92C1B9004EAE06 /* GFError.swift in Sources */,
 				15C9E0552D9173FF004EAE06 /* GFTextField.swift in Sources */,
