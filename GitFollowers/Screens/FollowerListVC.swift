@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol FollowerListDelegate: AnyObject {
-    func didFollowertapped(with userusername : String)
-}
+
 
 final class FollowerListVC: GFDataLoadingVc {
     
@@ -104,7 +102,7 @@ final class FollowerListVC: GFDataLoadingVc {
                 self.presentGFAlerONMainThread(title: "Bad stuff happend", message: error.rawValue, buttonTile: "ok")
                 
             }
-            self.isLoadMoreFollowers = true
+            self.isLoadMoreFollowers = false
         })
     }
     
@@ -132,7 +130,7 @@ final class FollowerListVC: GFDataLoadingVc {
             case .success(let user):
                 let follower = Follower(login: user.login, avatarUrl: user.avatar_url)
                 
-                PresistenceManager.updateWith(follower: follower, actionType: .add) { [weak self] error in
+                PersistenceManager.updateWith(follower: follower, actionType: .add) { [weak self] error in
                     guard let self = self else {return}
 
                     guard let error = error else {
@@ -197,7 +195,7 @@ extension FollowerListVC : UISearchResultsUpdating {
     
 }
 
-extension FollowerListVC : FollowerListDelegate {
+extension FollowerListVC : FollowerUserInfoVc {
     
     func didFollowertapped(with username: String) {
         self.username = username

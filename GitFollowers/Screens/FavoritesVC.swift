@@ -8,7 +8,7 @@
 import UIKit
 
 class FavoritesVC: GFDataLoadingVc {
-    private var tableView = UITableView()
+    private var tableView           = UITableView()
     private var favorits:[Follower] =  []
     
     override func viewDidLoad() {
@@ -47,7 +47,7 @@ class FavoritesVC: GFDataLoadingVc {
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
     }
     func getFavorites() {
-        PresistenceManager.retriveFavorites { [weak self ] resulte in
+        PersistenceManager.retriveFavorites { [weak self ] resulte in
             guard let self = self else {return}
             switch resulte {
             case .success(let favorites ):
@@ -82,7 +82,7 @@ extension FavoritesVC: UITableViewDelegate {
         favorits.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .left)
         
-        PresistenceManager.updateWith(follower: favorite, actionType: .reomve) { [weak self] error in
+        PersistenceManager.updateWith(follower: favorite, actionType: .reomve) { [weak self] error in
             guard let self = self else {return}
             
             guard let error = error else {return}

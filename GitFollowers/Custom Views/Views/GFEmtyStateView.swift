@@ -8,6 +8,7 @@
 import UIKit
 
 class GFEmtyStateView: UIView {
+    
     private var massageLabel = GFTitleLabel(textAlignment: .center, fontsize: 28)
     private var logoImageView = UIImageView()
     
@@ -21,20 +22,21 @@ class GFEmtyStateView: UIView {
         self.init(frame: .zero)
         massageLabel.text = massage
     }
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private func configure() {
-        
+        addSubViews(massageLabel , logoImageView)
         configureMessageLabel()
         configureLogoImage()
     }
     
     private func configureMessageLabel() {
-        
-        addSubview(massageLabel)
-        
+
         massageLabel.numberOfLines = 3
         massageLabel.textColor = .secondaryLabel
         
@@ -50,9 +52,7 @@ class GFEmtyStateView: UIView {
     }
     
     private func configureLogoImage() {
-        
-        addSubview(logoImageView)
-
+  
         logoImageView.image = Images.emptyStateLogo
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
  

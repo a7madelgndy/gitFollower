@@ -7,9 +7,25 @@
 
 import UIKit
 
+protocol GFRepoItemVCDelegete: AnyObject{
+    func didTappedGitHubProfile(for user: User)
+}
+
 class GFRepoItemVC: GFItemInfoVc {
     
-
+    weak var delegate: GFRepoItemVCDelegete?
+    
+    init(user : User, delegate: GFRepoItemVCDelegete? = nil ) {
+        super.init(user: user)
+        self.delegate = delegate
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureItems() 

@@ -8,25 +8,23 @@
 import UIKit
 import SafariServices
 
-protocol ActionButtonDelegete: AnyObject{
-    func didTappedGitHubProfile(for user: User)
-    func DidTappedGetFollowers(for user: User)
+protocol FollowerUserInfoVc: AnyObject {
+    func didFollowertapped(with userusername : String)
 }
 
-
-class UserInfoVc: GFDataLoadingVc {
+final class UserInfoVc: GFDataLoadingVc {
     
-    let headerView = UIView()
-    let itemViewOne = UIView()
-    let itemviewTwo = UIView()
-    var itemViews : [UIView] = [ ]
-    var dataLable = GFBodyLabel(textAlignment: .center)
+    private let headerView = UIView()
+    private let itemViewOne = UIView()
+    private let itemviewTwo = UIView()
+    private var itemViews : [UIView] = [ ]
+    private var dataLable = GFBodyLabel(textAlignment: .center)
     
     var  username: String?
     var  user: User?
-    var UserCreatedAt = String()
+    private var UserCreatedAt = String()
     
-    weak var delegate: FollowerListDelegate!
+    weak var delegate: FollowerUserInfoVc!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +38,7 @@ class UserInfoVc: GFDataLoadingVc {
         getUserInfo()
     }
     
-    func getUserInfo() {
+    private func getUserInfo() {
         showLoadingView()
         NetWorkManager.shared.getUser(for: username ?? "caioiglesias") { [weak self] result in
             guard let self = self  else {return}
@@ -58,19 +56,12 @@ class UserInfoVc: GFDataLoadingVc {
     
     
     private func configureUIElemtets(user : User) {
-        let userInfoHeader = GFUserInfoHeaderVC(user: user)
         
-        let repoItemVc = GFRepoItemVC(user: user)
-        repoItemVc.delegate = self
+        self.add(childVc: GFUserInfoHeaderVC(user: user), to: self.headerView)
+        self.add(childVc: GFRepoItemVC(user: user, delegate: self) , to: self.itemViewOne)
+        self.add(childVc: GFFollowerItemVC(user: user, delegate:self) ,to: self.itemviewTwo)
         
-        let followerItemVC = GFFollowerItemVC(user: user)
-        followerItemVC.delegate = self
-        
-        self.add(childVc: userInfoHeader, to: self.headerView)
-        self.add(childVc: repoItemVc , to: self.itemViewOne)
-        self.add(childVc: followerItemVC ,to: self.itemviewTwo)
-        
-        self.UserCreatedAt =  user.created_at.convertToMonthYearFormat()
+        self.UserCreatedAt =  "Git hub Since \(user.created_at.convertToMonthYearFormat())"
         self.dataLable.text = self.UserCreatedAt
     }
     
@@ -110,7 +101,7 @@ class UserInfoVc: GFDataLoadingVc {
             itemviewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
             
             dataLable.topAnchor.constraint(equalTo: itemviewTwo.bottomAnchor, constant: padding),
-            dataLable.heightAnchor.constraint(equalToConstant: 23)
+            dataLable.heightAnchor.constraint(equalToConstant: 40)
         ])
         
     }
@@ -128,9 +119,9 @@ class UserInfoVc: GFDataLoadingVc {
 
 
 }
-
-extension UserInfoVc: ActionButtonDelegete {
-    func didTappedGitHubProfile(for user: User) {
+//MARK: Extension
+extension UserInfoVc : GFRepoItemVCDelegete {
+     func didTappedGitHubProfile(for user: User) {
         guard let url = URL(string: user.html_url) else {
             presentGFAlerONMainThread(
                 title: "Invalid URL", message: "The url attaced to This user is invalid", buttonTile: "ok")
@@ -138,13 +129,20 @@ extension UserInfoVc: ActionButtonDelegete {
         }
         pressenSafrieVC(with: url)
     }
-    
-    func DidTappedGetFollowers(for user: User) {
+}
+extension UserInfoVc : GFFollowerItemVCDelegete {
+     func didTappedGetFollowers(for user: User) {
+        guard user.followers != 0 else {
+            presentGFAlerONMainThread(title: "No Followers", message: "This user have no Follower , what a shame go follow them 😞", buttonTile: "ok")
+            return
+        }
         dismiss(animated: true)
         delegate.didFollowertapped(with: user.login)
     }
-
+    
+    
 }
+
     
     
 

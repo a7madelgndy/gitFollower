@@ -35,8 +35,8 @@ class GFAlertVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        view.addSubViews(containerView ,titleLabel ,actionButton,messageLabel)
         configerContainerView()
         configerTitleLable()
         configerActionButton()
@@ -46,8 +46,6 @@ class GFAlertVC: UIViewController {
     
     
     func configerContainerView(){
-        view.addSubview(containerView)
-        
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -57,7 +55,6 @@ class GFAlertVC: UIViewController {
     }
     
     func configerTitleLable() {
-        containerView.addSubview(titleLabel)
         titleLabel.text = alerTitle ?? "someting Went Wrong"
         
         NSLayoutConstraint.activate([
@@ -68,9 +65,7 @@ class GFAlertVC: UIViewController {
         ])
     }
     
-    func configerActionButton() {
-        containerView.addSubview(actionButton)
-        actionButton.setTitle(buttonTile ?? "ok", for: .normal)
+    func configerActionButton() {        actionButton.setTitle(buttonTile ?? "ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate(
@@ -83,7 +78,6 @@ class GFAlertVC: UIViewController {
         )
     }
     func configerMessageLabel() {
-        containerView.addSubview(messageLabel)
         messageLabel.text = message ?? "unable to complete request"
         messageLabel.numberOfLines = 4
         
@@ -97,7 +91,5 @@ class GFAlertVC: UIViewController {
     @objc func dismissVC() {
         dismiss(animated: true )
     }
-    
-
 }
 

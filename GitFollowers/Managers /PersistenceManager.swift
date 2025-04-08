@@ -11,7 +11,7 @@ enum PresistenceActionType {
     case add, reomve
 }
 
-enum PresistenceManager {
+enum PersistenceManager {
     
     static private let defulats = UserDefaults.standard
     
@@ -22,22 +22,21 @@ enum PresistenceManager {
     static func updateWith(follower: Follower ,actionType: PresistenceActionType, completed : @escaping(GFError?) -> Void) {
         retriveFavorites { resulte in
             switch resulte {
-            case .success(let favorites):
-                var retrivedFavorites = favorites
+            case .success(var favorites):
                 
                 switch actionType {
                 case .add:
-                    guard  !retrivedFavorites.contains(follower) else {
+                    guard  !favorites.contains(follower) else {
                         completed(.alreadyInFavorite)
                         
                         return
                     }
-                    retrivedFavorites.append(follower)
+                    favorites.append(follower)
  
                 case .reomve:
-                    retrivedFavorites.removeAll { $0.login == follower.login}
+                    favorites.removeAll { $0.login == follower.login}
                 }
-                completed(save(favorites: retrivedFavorites))
+                completed(save(favorites: favorites))
             case .failure(let error ):
                 completed(error)
             }
