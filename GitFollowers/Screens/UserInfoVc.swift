@@ -14,7 +14,7 @@ protocol ActionButtonDelegete: AnyObject{
 }
 
 
-class UserInfoVc: UIViewController {
+class UserInfoVc: GFDataLoadingVc {
     
     let headerView = UIView()
     let itemViewOne = UIView()
@@ -32,17 +32,20 @@ class UserInfoVc: UIViewController {
         super.viewDidLoad()
         configerViewController()
         layouUI()
-        getUserInfo()
         itemViewOne.backgroundColor = .secondaryLabel
         itemviewTwo.backgroundColor = .secondaryLabel
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        getUserInfo()
+    }
     
     func getUserInfo() {
+        showLoadingView()
         NetWorkManager.shared.getUser(for: username ?? "caioiglesias") { [weak self] result in
             guard let self = self  else {return}
+            self.dismissLoadingView()
             switch result {
-                
             case .success(let user):
                 DispatchQueue.main.async{self.configureUIElemtets(user: user)}
                 
@@ -67,7 +70,7 @@ class UserInfoVc: UIViewController {
         self.add(childVc: repoItemVc , to: self.itemViewOne)
         self.add(childVc: followerItemVC ,to: self.itemviewTwo)
         
-        self.UserCreatedAt =  user.created_at.convertToDisplayFormat()
+        self.UserCreatedAt =  user.created_at.convertToMonthYearFormat()
         self.dataLable.text = self.UserCreatedAt
     }
     

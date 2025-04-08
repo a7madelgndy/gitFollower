@@ -31,6 +31,8 @@ class SearchVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        #warning("add this line")
+        //usernameTextFiled.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
 
     }
@@ -50,9 +52,10 @@ class SearchVC: UIViewController {
             presentGFAlerONMainThread(title: "Emety UserName", message: "please enter a username . we need to know who to look for 😁 ", buttonTile: "ok")
         return
         }
-        let followerListVC = FollowerListVC()
-        followerListVC.username = usernameTextFiled.text
-        followerListVC.title = usernameTextFiled.text
+        usernameTextFiled.resignFirstResponder()
+        guard let username =  usernameTextFiled.text else { return  }
+        let followerListVC = FollowerListVC(username: username)
+ 
         navigationController?.pushViewController(followerListVC, animated: true)
     }
     

@@ -17,10 +17,9 @@ class GFEmtyStateView: UIView {
         configure()
     }
     
-    init(massage: String) {
-        super.init(frame: .zero)
+    convenience init(massage: String) {
+        self.init(frame: .zero)
         massageLabel.text = massage
-        configure()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

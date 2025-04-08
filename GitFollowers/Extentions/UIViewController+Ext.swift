@@ -27,38 +27,6 @@ extension UIViewController {
     }
     
     
-    func showLoadingView() {
-        ContainerView  = UIView(frame: view.bounds)
-        view.addSubview(ContainerView)
-        
-        ContainerView.backgroundColor = .systemBackground
-        ContainerView.alpha = 0
-        UIView.animate(withDuration: 0.3) {ContainerView.alpha = 0.8  }
-        
-        let activiyIndicator = UIActivityIndicatorView(style: .large)
-        ContainerView.addSubview(activiyIndicator)
-        activiyIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            activiyIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            activiyIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        activiyIndicator.startAnimating()
-    }
-    
-    func dismissLoadingView() {
-        DispatchQueue.main.async {
-            ContainerView.removeFromSuperview()
-            ContainerView = nil
-        }
-    }
-    
-    func showEmptyStateView(with massage: String , in view : UIView) {
-        DispatchQueue.main.async {
-            let emtyStateView = GFEmtyStateView(massage: massage)
-            emtyStateView.frame = view.bounds
-            view.addSubview(emtyStateView)
-        }
 
-    }
     
 }

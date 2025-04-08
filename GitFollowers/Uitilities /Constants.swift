@@ -7,6 +7,9 @@
 
 import UIKit
 
+enum Constants {
+    static let numberOfUsersPerPage = 50
+}
 enum SFSymbols {
     static let location = "mappin.and.ellipse"
     static let repos = "folder"

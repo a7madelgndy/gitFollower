@@ -9,7 +9,7 @@ import UIKit
 
 class FollowerCell: UICollectionViewCell {
     static let id = "FollowerCell"
-    private let avaterImageView = GFAvatarImageView(frame: .zero)
+    private var avaterImageView = GFAvatarImageView(frame: .zero)
     private let usernameLabel   = GFTitleLabel(textAlignment: .center, fontsize: 16)
     
     override init(frame: CGRect) {
@@ -23,7 +23,17 @@ class FollowerCell: UICollectionViewCell {
     
     func set(follower: Follower){
         usernameLabel.text = follower.login
-        avaterImageView.downloadImage(from: follower.avatarUrl)
+        downloadAvaterimage(form: follower.avatarUrl)
+    }
+    
+    private func downloadAvaterimage(form avatarURl : String) {
+        NetWorkManager.shared.downloadImage(from: avatarURl) { [weak self] image in
+            guard let image = image else {return}
+            DispatchQueue.main.async{
+                self?.avaterImageView.image = image
+                
+            }
+        }
     }
     
     

@@ -20,7 +20,6 @@ class GFFollowerItemVC: GFItemInfoVc {
     }
     
     override func actionButtonTapped() {
-        print("Delegate 1 works ")
         delegate?.DidTappedGetFollowers(for: user)
     }
 

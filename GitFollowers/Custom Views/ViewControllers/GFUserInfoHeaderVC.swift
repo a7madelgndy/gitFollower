@@ -34,7 +34,8 @@ class GFUserInfoHeaderVC: UIViewController {
     
     
     func configureUIElements() {
-        avatarImageView.downloadImage(from: user.avatar_url)
+        downloadAvaterimage(from: user.avatar_url)
+        
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? " "
         locationLabel.text = user.location ?? "No location"
@@ -46,8 +47,17 @@ class GFUserInfoHeaderVC: UIViewController {
         
     }
     
+    private func downloadAvaterimage(from avaterUrl : String) {
+        NetWorkManager.shared.downloadImage(from: avaterUrl) { [weak self] image in
+            guard let image = image else {return}
+            DispatchQueue.main.async{
+                self?.avatarImageView.image = image
+                
+            }
+        }
+    }
     
-    func addSubview() {
+    private func addSubview() {
         view.addSubview(avatarImageView)
         view.addSubview(usernameLabel)
         view.addSubview(nameLabel)
@@ -57,7 +67,7 @@ class GFUserInfoHeaderVC: UIViewController {
     }
     
     
-    func layouUI() {
+    private func layouUI() {
         let padding: CGFloat = 20
         let textImagePadding : CGFloat = 12
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
