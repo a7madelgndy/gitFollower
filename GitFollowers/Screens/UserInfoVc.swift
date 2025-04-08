@@ -14,6 +14,9 @@ protocol FollowerUserInfoVc: AnyObject {
 
 final class UserInfoVc: GFDataLoadingVc {
     
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
     private let headerView = UIView()
     private let itemViewOne = UIView()
     private let itemviewTwo = UIView()
@@ -29,13 +32,24 @@ final class UserInfoVc: GFDataLoadingVc {
     override func viewDidLoad() {
         super.viewDidLoad()
         configerViewController()
+        configureScollView()
         layouUI()
-        itemViewOne.backgroundColor = .secondaryLabel
-        itemviewTwo.backgroundColor = .secondaryLabel
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getUserInfo()
+    }
+    
+    func configureScollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+
+        scrollView.pinToEdges(of: view)
+        contentView.pinToEdges(of: scrollView)
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 600)
+        ])
     }
     
     private func getUserInfo() {
@@ -57,12 +71,17 @@ final class UserInfoVc: GFDataLoadingVc {
     
     private func configureUIElemtets(user : User) {
         
+        itemViewOne.backgroundColor = .secondarySystemBackground
+        itemviewTwo.backgroundColor = .secondarySystemBackground
+        
         self.add(childVc: GFUserInfoHeaderVC(user: user), to: self.headerView)
         self.add(childVc: GFRepoItemVC(user: user, delegate: self) , to: self.itemViewOne)
         self.add(childVc: GFFollowerItemVC(user: user, delegate:self) ,to: self.itemviewTwo)
         
         self.UserCreatedAt =  "Git hub Since \(user.created_at.convertToMonthYearFormat())"
         self.dataLable.text = self.UserCreatedAt
+        
+  
     }
     
     
@@ -79,19 +98,19 @@ final class UserInfoVc: GFDataLoadingVc {
         itemViews = [headerView, itemViewOne, itemviewTwo ,dataLable]
         
         for itemView in itemViews {
-            view.addSubview(itemView)
+            contentView.addSubview(itemView)
             itemView.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                itemView.leadingAnchor.constraint(equalTo: view.leadingAnchor ,constant: padding),
-                itemView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -padding)
+                itemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor ,constant: padding),
+                itemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -padding)
             ])
         }
-        itemviewTwo.layer.cornerRadius = 20
+        
         itemViewOne.layer.cornerRadius = 20
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 180),
             
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor , constant: padding),

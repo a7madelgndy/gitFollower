@@ -186,12 +186,12 @@
 			isa = PBXGroup;
 			children = (
 				15C9E0672D928E8C004EAE06 /* Extentions */,
-				15C9E0682D928E9E004EAE06 /* Support */,
 				15C9E0712D92C191004EAE06 /* Uitilities  */,
 				15C9E06E2D92ACFA004EAE06 /* Managers  */,
 				15C9E0692D929487004EAE06 /* Model */,
 				15C9E0652D928E5A004EAE06 /* Custom Views */,
 				15C9E0662D928E7D004EAE06 /* Screens */,
+				15C9E0682D928E9E004EAE06 /* Support */,
 				15C9E04A2D901826004EAE06 /* Info.plist */,
 			);
 			path = GitFollowers;

@@ -39,8 +39,7 @@ class GFItemInfoVc: UIViewController  {
     }
     
     private func configerControllerView() {
-        view.layer.cornerRadius = 18
-        view.layer.borderWidth = 5    
+        view.layer.cornerRadius = 18  
     }
     
     private func configureStackView() {
