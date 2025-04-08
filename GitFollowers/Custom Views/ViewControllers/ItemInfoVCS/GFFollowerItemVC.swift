@@ -36,7 +36,7 @@ class GFFollowerItemVC: GFItemInfoVc {
     private func configureItems() {
         itemInfoViewOne.set(itemInfoType: .followers, withCount: user?.public_repos ?? 0 )
         itemInfoViewTwo.set(itemInfoType: .following, withCount: user?.public_gists ?? 0)
-        actionButon.set(backgroundColor: .systemGreen , title: "Show Followers")
+        actionButon.set(color: .systemGreen , title: "Show Followers", systemNameImage: "person.2.badge.plus.fill")
     }
     
     

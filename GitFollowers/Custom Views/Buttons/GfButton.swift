@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GfButton: UIButton {
+final class GfButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,22 +20,27 @@ class GfButton: UIButton {
     }
     
     
-    convenience init(backgroundColor : UIColor, title: String){
+    convenience init(color : UIColor, title: String,  systemNameImage: String){
         self.init(frame: .zero)
-        self.backgroundColor = backgroundColor
-        self.setTitle(title, for: .normal)
+        self.set(color: color, title: title,  systemNameImage: systemNameImage )
     }
     
     
     private func configure() {
-        layer.cornerRadius     = 10
-        titleLabel?.font       = UIFont.preferredFont(forTextStyle: .headline)
-        setTitleColor(.white, for: .normal)
+        configuration =  .tinted()
+        configuration?.cornerStyle = .medium
+        /Users/ahmedelgndy/Desktop/GitFollowers/GitFollowers.xcodeproj
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func set(backgroundColor : UIColor , title: String ) {
-        self.backgroundColor = backgroundColor
-        self.setTitle(title, for: .normal)
+    func set(color : UIColor , title: String, systemNameImage: String) {
+        configuration?.baseBackgroundColor = color
+        configuration?.baseForegroundColor = color
+        configuration?.title = title
+        
+        configuration?.image = UIImage(systemName: systemNameImage)
+        configuration?.imagePadding = 6
+        configuration?.imagePlacement = .leading
+        
     }
 }
