@@ -8,31 +8,31 @@
 import UIKit
 
 class GFDataLoadingVc: UIViewController {
-    private var ContainerView : UIView!
+    private var containerView : UIView!
 
     func showLoadingView() {
 
-        ContainerView  = UIView(frame: view.bounds)
-        view.addSubview(ContainerView)
+        containerView  = UIView(frame: view.bounds)
+        view.addSubview(containerView)
         
-        ContainerView.backgroundColor = .systemBackground
-        ContainerView.alpha = 0
-        UIView.animate(withDuration: 0.3) {self.ContainerView.alpha = 0.8  }
+        containerView.backgroundColor = .systemBackground
+        containerView.alpha = 0
+        UIView.animate(withDuration: 0.3) {self.containerView.alpha = 0.8  }
         
         let activiyIndicator = UIActivityIndicatorView(style: .large)
-        ContainerView.addSubview(activiyIndicator)
+        containerView.addSubview(activiyIndicator)
         activiyIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            activiyIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            activiyIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            activiyIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            activiyIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
         activiyIndicator.startAnimating()
     }
     
     func dismissLoadingView() {
         DispatchQueue.main.async {
-            self.ContainerView.removeFromSuperview()
-            self.ContainerView = nil
+            self.containerView.removeFromSuperview()
+            self.containerView = nil
         }
     }
     

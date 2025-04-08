@@ -26,27 +26,45 @@ class GFEmtyStateView: UIView {
     }
     
     private func configure() {
+        
+        configureMessageLabel()
+        configureLogoImage()
+    }
+    
+    private func configureMessageLabel() {
+        
         addSubview(massageLabel)
-        addSubview(logoImageView)
         
         massageLabel.numberOfLines = 3
         massageLabel.textColor = .secondaryLabel
         
-        logoImageView.image = UIImage(named: "empty-state-logo")
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
- 
-        NSLayoutConstraint.activate(
-            [massageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor ,constant: -144),
+        let isSmallScreenDevice =  DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed || DeviceTypes.isiPhoneSE2ndAnd3rdGen
+        let labelYOffset: CGFloat = isSmallScreenDevice ? -80 : -150
+        
+        NSLayoutConstraint.activate([
+             massageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor ,constant: labelYOffset),
              massageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
              massageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
              massageLabel.heightAnchor.constraint(equalToConstant:  200),
-             
-             logoImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier:   1),
-             logoImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1),
-             logoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor , constant : 130),
-             logoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 100)
+        ])
+    }
+    
+    private func configureLogoImage() {
+        
+        addSubview(logoImageView)
+
+        logoImageView.image = Images.emptyStateLogo
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+ 
+        NSLayoutConstraint.activate(
+            [
+             logoImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier:   1.3),
+             logoImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
+             logoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor , constant : 170),
+             logoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 120)
             
             ]
         )
     }
+    
 }
