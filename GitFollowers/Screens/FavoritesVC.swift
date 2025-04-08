@@ -15,7 +15,6 @@ class FavoritesVC: GFDataLoadingVc {
         super.viewDidLoad()
         configureControllerView ()
         configureTableView()
-        tableView.backgroundColor = .systemPink
     }
     
     
@@ -31,19 +30,15 @@ class FavoritesVC: GFDataLoadingVc {
     }
     
     private func configureTableView() {
+        view.addSubview(tableView)
+        
+        tableView.frame = view.bounds
+        
+        tableView.removeExcessCells()
+        
         tableView.delegate  = self
         tableView.dataSource = self
         
-        view.addSubview(tableView)
-        tableView.rowHeight = 100
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-         ])
-
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
     }
     func getFavorites() {
@@ -71,29 +66,35 @@ class FavoritesVC: GFDataLoadingVc {
 //MARK: Extentions
 
 extension FavoritesVC: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let  favorite = favorits[indexPath.row]
         let  desVC = FollowerListVC(username: favorite.login)
         navigationController?.pushViewController(desVC, animated: true)
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else {return}
+        
         let  favorite = favorits[indexPath.row]
-        favorits.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
+        guard editingStyle == .delete else {return}
         
         PersistenceManager.updateWith(follower: favorite, actionType: .reomve) { [weak self] error in
             guard let self = self else {return}
-            
-            guard let error = error else {return}
-            
+            guard let error = error else {
+                self.favorits.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+                return}
             self.presentGFAlerONMainThread(title: "Unable to remove", message: error.rawValue , buttonTile: "ok")
         }
+        
+       
+
         
     }
 }
 extension FavoritesVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return favorits.count }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseIdentifier, for: indexPath) as! FavoriteCell
@@ -101,6 +102,8 @@ extension FavoritesVC: UITableViewDataSource {
         cell.set(favorite: favorite)
         return cell
     }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }

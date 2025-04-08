@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		157763AB2DA515D600F80D42 /* GFDataLoadingVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157763AA2DA515D600F80D42 /* GFDataLoadingVc.swift */; };
 		157763AD2DA534F500F80D42 /* UIView+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157763AC2DA534F500F80D42 /* UIView+EXT.swift */; };
+		157763AF2DA5518400F80D42 /* UITableView+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157763AE2DA5518400F80D42 /* UITableView+EXT.swift */; };
 		1595CADD2D9D4C5900039C61 /* GFEmtyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595CADC2D9D4C5900039C61 /* GFEmtyStateView.swift */; };
 		1595CADF2D9D6DAB00039C61 /* UserInfoVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595CADE2D9D6DAB00039C61 /* UserInfoVc.swift */; };
 		1595CAE12D9E9A1E00039C61 /* GFSecondaryTitleLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595CAE02D9E9A1E00039C61 /* GFSecondaryTitleLable.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		157763AA2DA515D600F80D42 /* GFDataLoadingVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDataLoadingVc.swift; sourceTree = "<group>"; };
 		157763AC2DA534F500F80D42 /* UIView+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+EXT.swift"; sourceTree = "<group>"; };
+		157763AE2DA5518400F80D42 /* UITableView+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+EXT.swift"; sourceTree = "<group>"; };
 		1595CADC2D9D4C5900039C61 /* GFEmtyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmtyStateView.swift; sourceTree = "<group>"; };
 		1595CADE2D9D6DAB00039C61 /* UserInfoVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVc.swift; sourceTree = "<group>"; };
 		1595CAE02D9E9A1E00039C61 /* GFSecondaryTitleLable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFSecondaryTitleLable.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				15C9E0632D927D5B004EAE06 /* UIViewController+Ext.swift */,
 				15E110B02DA1319D004DF12E /* Date+EXT.swift */,
 				157763AC2DA534F500F80D42 /* UIView+EXT.swift */,
+				157763AE2DA5518400F80D42 /* UITableView+EXT.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				1595CAE32D9EA29700039C61 /* GFUserInfoHeaderVC.swift in Sources */,
 				15C9E0622D927052004EAE06 /* GFAlertVC.swift in Sources */,
 				15C9E0782D92D2A0004EAE06 /* FollowerCell.swift in Sources */,
+				157763AF2DA5518400F80D42 /* UITableView+EXT.swift in Sources */,
 				15C9E06B2D929495004EAE06 /* Follower.swift in Sources */,
 				15C9E03D2D901824004EAE06 /* AppDelegate.swift in Sources */,
 				157763AD2DA534F500F80D42 /* UIView+EXT.swift in Sources */,
