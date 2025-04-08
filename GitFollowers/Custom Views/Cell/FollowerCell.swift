@@ -8,32 +8,27 @@
 import UIKit
 
 class FollowerCell: UICollectionViewCell {
-    static let id = "FollowerCell"
+    
+    static let id               = "FollowerCell"
+    
     private var avaterImageView = GFAvatarImageView(frame: .zero)
     private let usernameLabel   = GFTitleLabel(textAlignment: .center, fontsize: 16)
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func set(follower: Follower){
         usernameLabel.text = follower.login
-        downloadAvaterimage(form: follower.avatarUrl)
-    }
-    
-    private func downloadAvaterimage(form avatarURl : String) {
-        NetWorkManager.shared.downloadImage(from: avatarURl) { [weak self] image in
-            guard let image = image else {return}
-            DispatchQueue.main.async{
-                self?.avaterImageView.image = image
-                
-            }
-        }
+        avaterImageView.downloadimage(fromUrl: follower.avatarUrl)
     }
     
     
@@ -42,7 +37,6 @@ class FollowerCell: UICollectionViewCell {
 
         translatesAutoresizingMaskIntoConstraints = false
         let padding: CGFloat = 8
-        //all the cell have a contenView
         NSLayoutConstraint.activate([
             avaterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: padding),
             avaterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),

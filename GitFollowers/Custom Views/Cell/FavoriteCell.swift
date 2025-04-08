@@ -8,35 +8,29 @@
 import UIKit
 
 class FavoriteCell: UITableViewCell {
-    static let reuseIdentifier = "favoriteCell"
+    
+    static let reuseIdentifier  = "favoriteCell"
     private let avaterImageView = GFAvatarImageView(frame: .zero)
     private let usernameLabel   = GFTitleLabel(textAlignment: .left, fontsize: 28)
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func set(favorite: Follower){
         usernameLabel.text = favorite.login
-        downloadAvaterimage(form: favorite.avatarUrl)
+        avaterImageView.downloadimage(fromUrl: favorite.avatarUrl)
     }
     
-    
-    private func downloadAvaterimage(form avatarURl : String) {
-        NetWorkManager.shared.downloadImage(from: avatarURl) { [weak self] image in
-            guard let image = image else {return}
-            DispatchQueue.main.async{
-                self?.avaterImageView.image = image
-                
-            }
-        }
-    }
-    
+
     
     private func configure() {
         addSubViews(avaterImageView, usernameLabel)

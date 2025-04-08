@@ -8,9 +8,11 @@
 import UIKit
 
 final class NetWorkManager {
+
     static let shared = NetWorkManager()
     let cache         = NSCache<NSString, UIImage>()
     private let baseUrl = "https://api.github.com/users/"
+    
     private init() {}
     
     func getFollowers(for username: String , page: Int , completed: @escaping(Result<[Follower] , GFError>) -> Void) {
@@ -45,6 +47,7 @@ final class NetWorkManager {
         task.resume()
         
     }
+    
     
     func getUser(for username: String , completed: @escaping(Result<User , GFError>) -> Void) {
         let endpoint = baseUrl + "\(username)"
@@ -84,7 +87,6 @@ final class NetWorkManager {
     }
     
     func downloadImage(from urlString : String , completed: @escaping(UIImage?)-> Void) {
-
         let cacheKey =  NSString(string: urlString)
         if let image = self.cache.object(forKey: cacheKey) {
             completed(image)

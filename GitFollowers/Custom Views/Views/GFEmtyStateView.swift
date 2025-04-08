@@ -35,6 +35,7 @@ class GFEmtyStateView: UIView {
         configureLogoImage()
     }
     
+    
     private func configureMessageLabel() {
 
         massageLabel.numberOfLines = 3
@@ -50,6 +51,7 @@ class GFEmtyStateView: UIView {
              massageLabel.heightAnchor.constraint(equalToConstant:  200),
         ])
     }
+    
     
     private func configureLogoImage() {
   

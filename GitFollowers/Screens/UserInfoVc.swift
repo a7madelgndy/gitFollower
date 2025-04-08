@@ -29,6 +29,7 @@ final class UserInfoVc: GFDataLoadingVc {
     
     weak var delegate: FollowerUserInfoVc!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configerViewController()
@@ -36,9 +37,11 @@ final class UserInfoVc: GFDataLoadingVc {
         layouUI()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         getUserInfo()
     }
+    
     
     func configureScollView() {
         view.addSubview(scrollView)
@@ -51,6 +54,7 @@ final class UserInfoVc: GFDataLoadingVc {
             contentView.heightAnchor.constraint(equalToConstant: 600)
         ])
     }
+    
     
     private func getUserInfo() {
         showLoadingView()
@@ -125,6 +129,7 @@ final class UserInfoVc: GFDataLoadingVc {
         
     }
     
+    
     private func add(childVc : UIViewController , to containerView : UIView) {
      addChild(childVc)
      containerView.addSubview(childVc.view)
@@ -132,12 +137,12 @@ final class UserInfoVc: GFDataLoadingVc {
      childVc.didMove(toParent: self)
     }
     
+    
     @objc func dismisView() {
         dismiss(animated: true)
     }
-
-
 }
+
 //MARK: Extension
 extension UserInfoVc : GFRepoItemVCDelegete {
      func didTappedGitHubProfile(for user: User) {
@@ -149,6 +154,8 @@ extension UserInfoVc : GFRepoItemVCDelegete {
         pressenSafrieVC(with: url)
     }
 }
+
+
 extension UserInfoVc : GFFollowerItemVCDelegete {
      func didTappedGetFollowers(for user: User) {
         guard user.followers != 0 else {

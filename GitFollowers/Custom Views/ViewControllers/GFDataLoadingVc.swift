@@ -12,7 +12,6 @@ class GFDataLoadingVc: UIViewController {
     private var containerView : UIView!
 
     func showLoadingView() {
-
         containerView  = UIView(frame: view.bounds)
         view.addSubview(containerView)
         
@@ -30,12 +29,14 @@ class GFDataLoadingVc: UIViewController {
         activiyIndicator.startAnimating()
     }
     
+    
     func dismissLoadingView() {
         DispatchQueue.main.async {
             self.containerView.removeFromSuperview()
             self.containerView = nil
         }
     }
+    
     
     func showEmptyStateView(with massage: String , in view : UIView) {
         DispatchQueue.main.async {
@@ -45,5 +46,4 @@ class GFDataLoadingVc: UIViewController {
         }
 
     }
-
 }

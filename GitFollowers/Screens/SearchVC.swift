@@ -8,16 +8,13 @@
 import UIKit
 
 class SearchVC: UIViewController {
+    
     let logoImageView      = UIImageView()
     let usernameTextFiled  = GFTextField()
     let callToActionButton = GfButton(backgroundColor: .systemGreen, title: "Get Followers")
     
-    var logoImageTopConstrians: NSLayoutConstraint!
+    var isUserNameEntered: Bool { return  !(usernameTextFiled.text?.isEmpty ?? true)}
     
-    var isUserNameEntered: Bool {
-
-        return  !(usernameTextFiled.text?.isEmpty ?? true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,34 +25,36 @@ class SearchVC: UIViewController {
         configerCallToActionButton()
         createDismiskeyboardTapGesture()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        #warning("add this line")
+         #warning("add this line")
         //usernameTextFiled.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
-
+        
     }
+    
     
     func createDismiskeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
+    
     @objc func dismissKeyboard(){
-            view.endEditing(true)
+        view.endEditing(true)
     }
     
     
     @objc func pushFollowerListVC() {
         guard isUserNameEntered else {
             presentGFAlerONMainThread(title: "Emety UserName", message: "please enter a username . we need to know who to look for 😁 ", buttonTile: "ok")
-        return
+            return
         }
         usernameTextFiled.resignFirstResponder()
         guard let username =  usernameTextFiled.text else { return  }
         let followerListVC = FollowerListVC(username: username)
- 
+        
         navigationController?.pushViewController(followerListVC, animated: true)
     }
     
@@ -65,8 +64,8 @@ class SearchVC: UIViewController {
         logoImageView.image = Images.ghLogo
         
         let isSmallScreenDevice =  DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed || DeviceTypes.isiPhoneSE2ndAnd3rdGen
-        
         let TopConstrianConstant: CGFloat = isSmallScreenDevice ? 20 : 80
+        
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: TopConstrianConstant),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -75,6 +74,7 @@ class SearchVC: UIViewController {
         ])
         print(DeviceTypes.isiPhoneSE)
     }
+    
     
     func configureTextFiled() {
         usernameTextFiled.delegate = self
@@ -87,9 +87,10 @@ class SearchVC: UIViewController {
             usernameTextFiled.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -40),
             usernameTextFiled.heightAnchor.constraint(equalToConstant: 50 )
         ]
-        
+                                    
         )
     }
+    
     
     func configerCallToActionButton(){
         callToActionButton.addTarget(self, action: #selector(pushFollowerListVC), for: .touchUpInside)
@@ -100,8 +101,11 @@ class SearchVC: UIViewController {
             callToActionButton.heightAnchor.constraint(equalToConstant: 50)
             
         ])
+        
     }
+    
 }
+
 
 extension SearchVC:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

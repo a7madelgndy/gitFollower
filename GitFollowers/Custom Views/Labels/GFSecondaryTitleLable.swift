@@ -24,11 +24,11 @@ class GFSecondaryTitleLable: UILabel {
     }
     
     private func configure() {
-        textColor = .secondaryLabel
-        font = UIFont.preferredFont(forTextStyle: .body)
-        adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.75
-        lineBreakMode    = .byTruncatingTail
+        textColor                                 = .secondaryLabel
+        font                                      = UIFont.preferredFont(forTextStyle: .body)
+        adjustsFontSizeToFitWidth                 = true
+        minimumScaleFactor                        = 0.75
+        lineBreakMode                             = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }
     

@@ -203,7 +203,7 @@
 				1595CADA2D9D4BFD00039C61 /* ViewControllers */,
 				1595CAD82D9D4BD300039C61 /* Views */,
 				15C9E0762D92D27D004EAE06 /* Cell */,
-				15E110B62DA413BF004DF12E /* TabBar */,
+				15E110B62DA413BF004DF12E /* TabBarControllers */,
 				1595CADB2D9D4C1A00039C61 /* Labels */,
 				1595CAD92D9D4BE100039C61 /* ImageViews */,
 				1595CAD72D9D4BC900039C61 /* TextFields */,
@@ -291,12 +291,12 @@
 			path = UIHelper;
 			sourceTree = "<group>";
 		};
-		15E110B62DA413BF004DF12E /* TabBar */ = {
+		15E110B62DA413BF004DF12E /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
 				15E110B82DA413F6004DF12E /* GFTabBarController.swift */,
 			);
-			path = TabBar;
+			path = TabBarControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

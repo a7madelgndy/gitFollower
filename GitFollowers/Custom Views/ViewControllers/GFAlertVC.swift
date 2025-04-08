@@ -8,6 +8,7 @@
 import UIKit
 
 class GFAlertVC: UIViewController {
+    
     let containerView = GFContainerView()
     let titleLabel    = GFTitleLabel(textAlignment: .center, fontsize: 20)
     let messageLabel  = GFBodyLabel(textAlignment: .center)
@@ -37,6 +38,7 @@ class GFAlertVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         view.addSubViews(containerView ,titleLabel ,actionButton,messageLabel)
+        
         configerContainerView()
         configerTitleLable()
         configerActionButton()
@@ -54,6 +56,7 @@ class GFAlertVC: UIViewController {
         ])
     }
     
+    
     func configerTitleLable() {
         titleLabel.text = alerTitle ?? "someting Went Wrong"
         
@@ -65,7 +68,9 @@ class GFAlertVC: UIViewController {
         ])
     }
     
-    func configerActionButton() {        actionButton.setTitle(buttonTile ?? "ok", for: .normal)
+    
+    func configerActionButton() {
+        actionButton.setTitle(buttonTile ?? "ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate(
@@ -77,6 +82,8 @@ class GFAlertVC: UIViewController {
         ]
         )
     }
+    
+    
     func configerMessageLabel() {
         messageLabel.text = message ?? "unable to complete request"
         messageLabel.numberOfLines = 4
@@ -88,6 +95,8 @@ class GFAlertVC: UIViewController {
             messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor , constant : -padding)
         ])
     }
+    
+    
     @objc func dismissVC() {
         dismiss(animated: true )
     }

@@ -13,6 +13,7 @@ protocol ItemInfoVcDelegete: AnyObject{
 }
 
 class GFItemInfoVc: UIViewController  {
+    
     let stackView  = UIStackView()
     let itemInfoViewOne = GFItemInfoView()
     let itemInfoViewTwo = GFItemInfoView()
@@ -29,18 +30,22 @@ class GFItemInfoVc: UIViewController  {
         configureActionButton()
     }
     
+    
     init(user: User!) {
         super.init(nibName: nil, bundle: nil)
         self.user = user
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private func configerControllerView() {
         view.layer.cornerRadius = 18  
     }
+    
     
     private func configureStackView() {
         stackView.axis = .horizontal
@@ -48,6 +53,7 @@ class GFItemInfoVc: UIViewController  {
         stackView.addArrangedSubview(itemInfoViewOne)
         stackView.addArrangedSubview(itemInfoViewTwo)
     }
+    
     
     private func LayouUI() {
         
@@ -71,10 +77,13 @@ class GFItemInfoVc: UIViewController  {
         ])
         
     }
+    
+    
     private func configureActionButton() {
         actionButon.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
     }
 
+    
     @objc func actionButtonTapped() {
         
     }

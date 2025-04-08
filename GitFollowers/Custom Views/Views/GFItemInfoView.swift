@@ -11,20 +11,23 @@ enum ItemInfoType {
     case repos , gists, followers, following
 }
 
-
 class GFItemInfoView: UIView {
+    
     let symbolImageView = UIImageView()
-    let titleLable = GFTitleLabel(textAlignment: .left, fontsize: 20)
-    let countLabel = GFTitleLabel(textAlignment: .center, fontsize: 20)
+    let titleLable      = GFTitleLabel(textAlignment: .left, fontsize: 20)
+    let countLabel      = GFTitleLabel(textAlignment: .center, fontsize: 20)
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configuer()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     private func configuer() {
         addSubViews(symbolImageView, titleLable, countLabel)

@@ -14,21 +14,23 @@ final class FollowerListVC: GFDataLoadingVc {
     enum Section {case main}
     
     private var username: String!
-    private var followers: [Follower] = []
+    private var followers: [Follower]       = []
     private var filtedFollowers :[Follower] = []
-    private var page : Int = 1
-    private var hasMoreFollowers = true
-    private var isSearching = false
-    private var isLoadMoreFollowers = false
+    private var page : Int                  = 1
+    private var hasMoreFollowers            = true
+    private var isSearching                 = false
+    private var isLoadMoreFollowers         = false
     
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    
     
     init(username : String){
         super.init(nibName: nil, bundle: nil)
         self.username = username
         title = username
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -44,11 +46,13 @@ final class FollowerListVC: GFDataLoadingVc {
         getFollowers(username: username, page: page)
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
+    
     func configerControllerView() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -57,6 +61,7 @@ final class FollowerListVC: GFDataLoadingVc {
         navigationItem.rightBarButtonItem = addButton
     }
     
+    
     func configerSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
@@ -64,6 +69,8 @@ final class FollowerListVC: GFDataLoadingVc {
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
     }
+    
+    
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view) )
         collectionView.delegate = self
@@ -74,7 +81,6 @@ final class FollowerListVC: GFDataLoadingVc {
     
 
     func getFollowers(username : String , page: Int) {
-        
         showLoadingView()
         isLoadMoreFollowers = true
         
@@ -82,21 +88,8 @@ final class FollowerListVC: GFDataLoadingVc {
             guard let self = self else {return}
             self.dismissLoadingView()
             switch result {
-            case .success(let followers):
-                if followers.count < Constants.numberOfUsersPerPage {
-                    hasMoreFollowers = false
-                }
-                self.followers += followers
-                
-                if followers.isEmpty {
-                    hasMoreFollowers = false
-                    let massage = "This user has no Followers , go follow them 😃"
-                    DispatchQueue.main.async{
-                        self.showEmptyStateView(with: massage, in: self.view)
-                    }
-                    return
-                }
-                self.updataData(on: self.followers)
+            case .success(let followers): 
+                self.udateUI(with:followers)
                 
             case .failure(let error):
                 self.presentGFAlerONMainThread(title: "Bad stuff happend", message: error.rawValue, buttonTile: "ok")
@@ -106,6 +99,26 @@ final class FollowerListVC: GFDataLoadingVc {
         })
     }
     
+    
+    func udateUI(with followers: [Follower]){
+        if followers.count < Constants.numberOfUsersPerPage {
+            hasMoreFollowers = false
+        }
+        
+        self.followers += followers
+        
+        if followers.isEmpty {
+            hasMoreFollowers = false
+            let massage = "This user has no Followers , go follow them 😃"
+            DispatchQueue.main.async{
+                self.showEmptyStateView(with: massage, in: self.view)
+            }
+            return
+        }
+        self.updataData(on: self.followers)
+    }
+    
+    
     func ConfigureDataSouce() {
         dataSource = UICollectionViewDiffableDataSource<Section, Follower> (collectionView: collectionView) { collectionView, indexPath, follower in
             let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.id, for: indexPath) as! FollowerCell
@@ -113,6 +126,8 @@ final class FollowerListVC: GFDataLoadingVc {
             return cell
         }
     }
+    
+    
     func updataData(on followers:[Follower]){
       var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
       snapshot.appendSections([.main])
@@ -121,6 +136,8 @@ final class FollowerListVC: GFDataLoadingVc {
           self.dataSource.apply(snapshot ,animatingDifferences: true)
         }
     }
+    
+    
   //MARK: Selectors
     @objc func addButtonTapped() {
         NetWorkManager.shared.getUser(for: username) { [weak self] result in
@@ -128,22 +145,28 @@ final class FollowerListVC: GFDataLoadingVc {
             
             switch result {
             case .success(let user):
-                let follower = Follower(login: user.login, avatarUrl: user.avatar_url)
-                
-                PersistenceManager.updateWith(follower: follower, actionType: .add) { [weak self] error in
-                    guard let self = self else {return}
+                addUserToFavorites(with: user)
 
-                    guard let error = error else {
-                        self.presentGFAlerONMainThread(title: "Success! ", message: "you have Successfuly add this user to the favoite list 😁", buttonTile: "Horray🎉")
-                        return
-                    }
-                    self.presentGFAlerONMainThread(title:  "some thing Went Wrong", message: error.rawValue, buttonTile: "okay")
-                }
-                break
             case .failure(let error):
                 self.presentGFAlerONMainThread(title: "some thing Went Wrong", message: error.rawValue, buttonTile: "ok")
                 break
             }
+        }
+    }
+    
+    
+    
+    private func  addUserToFavorites(with user : User) {
+        let favorite = Follower(login: user.login, avatarUrl: user.avatar_url)
+        
+        PersistenceManager.updateWith(follower: favorite, actionType: .add) { [weak self] error in
+            guard let self = self else {return}
+
+            guard let error = error else {
+                self.presentGFAlerONMainThread(title: "Success! ", message: "you have Successfuly add this user to the favoite list 😁", buttonTile: "Horray🎉")
+                return
+            }
+            self.presentGFAlerONMainThread(title:  "some thing Went Wrong", message: error.rawValue, buttonTile: "okay")
         }
     }
 }
@@ -164,6 +187,7 @@ extension FollowerListVC: UICollectionViewDelegate{
         }
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let activArray = isSearching ? filtedFollowers : followers
@@ -177,6 +201,7 @@ extension FollowerListVC: UICollectionViewDelegate{
     }
 }
 
+
 extension FollowerListVC : UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -185,6 +210,7 @@ extension FollowerListVC : UISearchResultsUpdating {
             updataData(on: followers)
             isSearching.toggle()
             return}
+        
         isSearching.toggle()
         filtedFollowers = followers.filter{$0.login.lowercased().contains(filter.lowercased())}
         updataData(on: filtedFollowers)
@@ -199,9 +225,10 @@ extension FollowerListVC : FollowerUserInfoVc {
     
     func didFollowertapped(with username: String) {
         self.username = username
-        self.title = username
+        self.title    = username
+        page          = 1
+        
         guard  hasMoreFollowers else  {return}
-        page = 1
         followers.removeAll()
         filtedFollowers.removeAll()
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)

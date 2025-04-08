@@ -15,6 +15,7 @@ class GFRepoItemVC: GFItemInfoVc {
     
     weak var delegate: GFRepoItemVCDelegete?
     
+    
     init(user : User, delegate: GFRepoItemVCDelegete? = nil ) {
         super.init(user: user)
         self.delegate = delegate

@@ -8,6 +8,7 @@
 import UIKit
 
 class FavoritesVC: GFDataLoadingVc {
+    
     private var tableView           = UITableView()
     private var favorits:[Follower] =  []
     
@@ -23,11 +24,13 @@ class FavoritesVC: GFDataLoadingVc {
         getFavorites()
     }
     
+    
     private func configureControllerView () {
         view.backgroundColor = .systemBackground
         title = "Favorites"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
     
     private func configureTableView() {
         view.addSubview(tableView)
@@ -41,30 +44,37 @@ class FavoritesVC: GFDataLoadingVc {
         
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
     }
+    
+    
     func getFavorites() {
         PersistenceManager.retriveFavorites { [weak self ] resulte in
             guard let self = self else {return}
             switch resulte {
             case .success(let favorites ):
-                if favorites.isEmpty {
-                    self.showEmptyStateView(with: "No Favorites?\n", in: self.view)
-                } else {
-                    self.favorits = favorites
-                    DispatchQueue.main.async{
-                        self.tableView.reloadData()
-                    }
-                }
-               
+                self.udateUI(with: favorites)
             case .failure(let error):
                 self.presentGFAlerONMainThread(title: "Somthing Went Wrong", message: error.rawValue, buttonTile: "ok")
             }
         }
     }
+    
+    
+    private func udateUI(with favorites : [Follower]){
+        if favorites.isEmpty {
+            self.showEmptyStateView(with: "No Favorites?\n", in: self.view)
+        } else {
+            self.favorits = favorites
+            DispatchQueue.main.async{
+                self.tableView.reloadData()
+            }
+        }
+       
+    }
 
 }
 
-//MARK: Extentions
 
+//MARK: Extentions
 extension FavoritesVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
