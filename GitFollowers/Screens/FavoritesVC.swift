@@ -25,6 +25,22 @@ class FavoritesVC: GFDataLoadingVc {
     }
     
     
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        if favorits.isEmpty {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "heart.fill")
+            config.imageProperties.tintColor = .systemRed
+            
+            config.text = "No Favorites"
+            config.secondaryText = "Go Add Some Favorites on The  Follower List Screen"
+            config.textProperties.color = .systemRed
+            contentUnavailableConfiguration = config
+        }else {
+            contentUnavailableConfiguration = nil
+        }
+    }
+    
+    
     private func configureControllerView () {
         view.backgroundColor = .systemBackground
         title = "Favorites"
@@ -62,10 +78,8 @@ class FavoritesVC: GFDataLoadingVc {
     
     
     private func udateUI(with favorites : [Follower]){
-        if favorites.isEmpty {
-            self.showEmptyStateView(with: "No Favorites?\nAdd one", in: self.view)
-        } else {
             self.favorits = favorites
+            setNeedsUpdateContentUnavailableConfiguration()
             DispatchQueue.main.async{
                 self.tableView.reloadData()
             }
@@ -73,7 +87,7 @@ class FavoritesVC: GFDataLoadingVc {
        
     }
 
-}
+
 
 
 //MARK: Extentions
@@ -86,19 +100,15 @@ extension FavoritesVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        let  favorite = favorits[indexPath.row]
         guard editingStyle == .delete else {return}
         
-        PersistenceManager.updateWith(follower: favorite, actionType: .reomve) { [weak self] error in
+        
+        PersistenceManager.updateWith(follower: favorits[indexPath.row], actionType: .reomve) { [weak self] error in
             guard let self else {return}
             guard let error else {
                 self.favorits.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
-                
-                if self.favorits.isEmpty {
-                    self.showEmptyStateView(with: "No Favorites?\nAdd one", in: self.view)
-                }
+                setNeedsUpdateContentUnavailableConfiguration()
                 return
             }
             DispatchQueue.main.async  {
@@ -112,7 +122,7 @@ extension FavoritesVC: UITableViewDelegate {
     }
 }
 extension FavoritesVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return favorits.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return favorits.count}
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -127,4 +137,9 @@ extension FavoritesVC: UITableViewDataSource {
         return 100
     }
     
+}
+
+
+#Preview {
+    return FavoritesVC()
 }

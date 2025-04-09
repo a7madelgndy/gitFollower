@@ -13,16 +13,19 @@ class GFEmtyStateView: UIView {
     private var logoImageView = UIImageView()
     
     
+    convenience init(massage: String) {
+        self.init(frame: .zero)
+        massageLabel.text = massage
+   
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
     
-    convenience init(massage: String) {
-        self.init(frame: .zero)
-        massageLabel.text = massage
-    }
     
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

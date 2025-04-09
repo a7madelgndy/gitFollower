@@ -28,7 +28,7 @@ final class GfButton: UIButton {
     
     private func configure() {
         configuration =  .tinted()
-        configuration?.cornerStyle = .medium
+        configuration?.cornerStyle = .capsule
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -42,4 +42,9 @@ final class GfButton: UIButton {
         configuration?.imagePlacement = .leading
         
     }
+}
+
+#Preview {
+    let but = GfButton(color: .systemBlue, title: "hi", systemNameImage: "person")
+    return but
 }

@@ -173,4 +173,6 @@ extension UserInfoVc : GFFollowerItemVCDelegete {
 
     
     
-
+#Preview {
+    return SearchVC()
+}

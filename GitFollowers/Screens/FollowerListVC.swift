@@ -51,7 +51,26 @@ final class FollowerListVC: GFDataLoadingVc {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
+    
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        if followers.isEmpty && !isLoadMoreFollowers {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "person.slash.fill")
+            config.imageProperties.tintColor = .systemRed
+            
+            config.text = "No Followers"
+            config.secondaryText = "Go Follow Them"
+            config.textProperties.color = .systemRed
+            
+            contentUnavailableConfiguration = config
+        }else if isSearching && filtedFollowers.isEmpty {
+            contentUnavailableConfiguration = UIContentUnavailableConfiguration.search()
+        }else {
+            contentUnavailableConfiguration = nil
+        }
+    }
+    
     
     func configerControllerView() {
         view.backgroundColor = .systemBackground
@@ -87,8 +106,6 @@ final class FollowerListVC: GFDataLoadingVc {
             do {
                 let followers = try await NetWorkManager.shared.getFollowers(for: username, page: page)
                 udateUI(with: followers)
-    
-                
             }catch {
                 if let gferro = error as? GFError {
                     presentGFAler(title: "Bad stuff happend", message: gferro.rawValue, buttonTile: "ok")
@@ -101,22 +118,15 @@ final class FollowerListVC: GFDataLoadingVc {
         }
     }
 
+    
     func udateUI(with followers: [Follower]){
         if followers.count < Constants.numberOfUsersPerPage {
             hasMoreFollowers = false
         }
         
-        self.followers += followers
-        
-        if followers.isEmpty {
-            hasMoreFollowers = false
-            let massage = "This user has no Followers , go follow them 😃"
-            DispatchQueue.main.async{
-                self.showEmptyStateView(with: massage, in: self.view)
-            }
-            return
-        }
+        self.followers.append(contentsOf: followers)
         self.updataData(on: self.followers)
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
     
@@ -194,7 +204,7 @@ extension FollowerListVC: UICollectionViewDelegate{
         let activArray = isSearching ? filtedFollowers : followers
         let follower = activArray[indexPath.item]
         let userInfoVc = UserInfoVc()
-        
+    
         userInfoVc.username = follower.login
         userInfoVc.delegate = self 
         let navController = UINavigationController(rootViewController: userInfoVc)
@@ -209,12 +219,13 @@ extension FollowerListVC : UISearchResultsUpdating {
         guard let filter = searchController.searchBar.text ,  !filter.isEmpty else {
             filtedFollowers.removeAll()
             updataData(on: followers)
-            isSearching.toggle()
+            isSearching = false
             return}
         
-        isSearching.toggle()
+        isSearching = true 
         filtedFollowers = followers.filter{$0.login.lowercased().contains(filter.lowercased())}
         updataData(on: filtedFollowers)
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
     
