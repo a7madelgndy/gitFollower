@@ -79,27 +79,28 @@ final class FollowerListVC: GFDataLoadingVc {
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.id)
     }
     
-
-    func getFollowers(username : String , page: Int) {
+    
+    func getFollowers(username : String , page: Int)  {
         showLoadingView()
         isLoadMoreFollowers = true
-        
-        NetWorkManager.shared.getFollowers(for: self.username, page: self.page, completed: { [weak self] result in
-            guard let self = self else {return}
-            self.dismissLoadingView()
-            switch result {
-            case .success(let followers): 
-                self.udateUI(with:followers)
+        Task{
+            do {
+                let followers = try await NetWorkManager.shared.getFollowers(for: username, page: page)
+                udateUI(with: followers)
+    
                 
-            case .failure(let error):
-                self.presentGFAlerONMainThread(title: "Bad stuff happend", message: error.rawValue, buttonTile: "ok")
-                
+            }catch {
+                if let gferro = error as? GFError {
+                    presentGFAler(title: "Bad stuff happend", message: gferro.rawValue, buttonTile: "ok")
+                } else  {
+                    presentDefaultError()
+                }
             }
-            self.isLoadMoreFollowers = false
-        })
+        dismissLoadingView()
+        isLoadMoreFollowers = false
+        }
     }
-    
-    
+
     func udateUI(with followers: [Follower]){
         if followers.count < Constants.numberOfUsersPerPage {
             hasMoreFollowers = false
@@ -140,33 +141,33 @@ final class FollowerListVC: GFDataLoadingVc {
     
   //MARK: Selectors
     @objc func addButtonTapped() {
-        NetWorkManager.shared.getUser(for: username) { [weak self] result in
-            guard let self = self else {return}
-            
-            switch result {
-            case .success(let user):
+        Task {
+            do {
+                let user = try await  NetWorkManager.shared.getUser(for:self.username)
                 addUserToFavorites(with: user)
-
-            case .failure(let error):
-                self.presentGFAlerONMainThread(title: "some thing Went Wrong", message: error.rawValue, buttonTile: "ok")
-                break
+            }catch {
+                if let error = error as? GFError{
+                    presentGFAler(title: "some thing Went Wrong", message: error.rawValue, buttonTile: "ok")
+                }else {
+                    presentDefaultError()
+                }
             }
         }
     }
     
-    
-    
     private func  addUserToFavorites(with user : User) {
-        let favorite = Follower(login: user.login, avatarUrl: user.avatar_url)
+        let favorite = Follower(login: user.login, avatar_url: user.avatar_url)
         
         PersistenceManager.updateWith(follower: favorite, actionType: .add) { [weak self] error in
             guard let self = self else {return}
 
             guard let error = error else {
-                self.presentGFAlerONMainThread(title: "Success! ", message: "you have Successfuly add this user to the favoite list 😁", buttonTile: "Horray🎉")
+                self.presentGFAler(title: "Success! ", message: "you have Successfuly add this user to the favoite list 😁", buttonTile: "Horray🎉")
                 return
             }
-            self.presentGFAlerONMainThread(title:  "some thing Went Wrong", message: error.rawValue, buttonTile: "okay")
+            DispatchQueue.main.async {
+                self.presentGFAler(title:  "some thing Went Wrong", message: error.rawValue, buttonTile: "okay")
+            }
         }
     }
 }

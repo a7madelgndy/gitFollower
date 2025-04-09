@@ -32,6 +32,7 @@ final class UserInfoVc: GFDataLoadingVc {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(username ?? "No user name")
         configerViewController()
         configureScollView()
         layouUI()
@@ -58,17 +59,18 @@ final class UserInfoVc: GFDataLoadingVc {
     
     private func getUserInfo() {
         showLoadingView()
-        NetWorkManager.shared.getUser(for: username ?? "caioiglesias") { [weak self] result in
-            guard let self = self  else {return}
-            self.dismissLoadingView()
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.async{self.configureUIElemtets(user: user)}
-                
-            case .failure(let error):
-                self.presentGFAlerONMainThread(title: "something went wrong ", message: error.rawValue, buttonTile: "ok")
-                print(error)
+        Task {
+            do {
+                let username = try await NetWorkManager.shared.getUser(for: self.username ?? "caioiglesias")
+                configureUIElemtets(user: username)
+            }catch {
+                if let error = error as? GFError {
+                    presentGFAler(title: "something went wrong ", message: error.rawValue, buttonTile: "ok")
+                }else  {
+                    presentDefaultError()
+                }
             }
+        dismissLoadingView()
         }
     }
     
@@ -147,7 +149,7 @@ final class UserInfoVc: GFDataLoadingVc {
 extension UserInfoVc : GFRepoItemVCDelegete {
      func didTappedGitHubProfile(for user: User) {
         guard let url = URL(string: user.html_url) else {
-            presentGFAlerONMainThread(
+            presentGFAler(
                 title: "Invalid URL", message: "The url attaced to This user is invalid", buttonTile: "ok")
             return
         }
@@ -159,7 +161,7 @@ extension UserInfoVc : GFRepoItemVCDelegete {
 extension UserInfoVc : GFFollowerItemVCDelegete {
      func didTappedGetFollowers(for user: User) {
         guard user.followers != 0 else {
-            presentGFAlerONMainThread(title: "No Followers", message: "This user have no Follower , what a shame go follow them 😞", buttonTile: "ok")
+            presentGFAler(title: "No Followers", message: "This user have no Follower , what a shame go follow them 😞", buttonTile: "ok")
             return
         }
         dismiss(animated: true)

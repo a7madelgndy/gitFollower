@@ -48,7 +48,7 @@ class SearchVC: UIViewController {
     
     @objc func pushFollowerListVC() {
         guard isUserNameEntered else {
-            presentGFAlerONMainThread(title: "Emety UserName", message: "please enter a username . we need to know who to look for 😁 ", buttonTile: "ok")
+            presentGFAler(title: "Emety UserName", message: "please enter a username . we need to know who to look for 😁 ", buttonTile: "ok")
             return
         }
         usernameTextFiled.resignFirstResponder()

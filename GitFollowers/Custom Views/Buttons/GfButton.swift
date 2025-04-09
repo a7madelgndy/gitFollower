@@ -29,7 +29,6 @@ final class GfButton: UIButton {
     private func configure() {
         configuration =  .tinted()
         configuration?.cornerStyle = .medium
-        /Users/ahmedelgndy/Desktop/GitFollowers/GitFollowers.xcodeproj
         translatesAutoresizingMaskIntoConstraints = false
     }
     
