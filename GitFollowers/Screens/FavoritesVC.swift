@@ -15,12 +15,12 @@ class FavoritesVC: GFDataLoadingVc {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureControllerView ()
-        configureTableView()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureTableView()
         getFavorites()
     }
     
@@ -48,7 +48,7 @@ class FavoritesVC: GFDataLoadingVc {
     
     func getFavorites() {
         PersistenceManager.retriveFavorites { [weak self ] resulte in
-            guard let self = self else {return}
+            guard let self else {return}
             switch resulte {
             case .success(let favorites ):
                 self.udateUI(with: favorites)
@@ -63,7 +63,7 @@ class FavoritesVC: GFDataLoadingVc {
     
     private func udateUI(with favorites : [Follower]){
         if favorites.isEmpty {
-            self.showEmptyStateView(with: "No Favorites?\n", in: self.view)
+            self.showEmptyStateView(with: "No Favorites?\nAdd one", in: self.view)
         } else {
             self.favorits = favorites
             DispatchQueue.main.async{
@@ -91,11 +91,16 @@ extension FavoritesVC: UITableViewDelegate {
         guard editingStyle == .delete else {return}
         
         PersistenceManager.updateWith(follower: favorite, actionType: .reomve) { [weak self] error in
-            guard let self = self else {return}
-            guard let error = error else {
+            guard let self else {return}
+            guard let error else {
                 self.favorits.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
-                return}
+                
+                if self.favorits.isEmpty {
+                    self.showEmptyStateView(with: "No Favorites?\nAdd one", in: self.view)
+                }
+                return
+            }
             DispatchQueue.main.async  {
                 self.presentGFAler(title: "Unable to remove", message: error.rawValue , buttonTile: "ok")
             }
