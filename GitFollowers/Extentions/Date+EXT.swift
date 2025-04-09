@@ -8,10 +8,8 @@
 import Foundation
 
 extension Date {
-    
+   
     func convertToMonthYearFormat () -> String {
-        let dateFromatter = DateFormatter()
-        dateFromatter.dateFormat = "MMM yyyy"
-        return dateFromatter.string(from: self)
+        return formatted(.dateTime.month(.wide).year())
     }
 }
