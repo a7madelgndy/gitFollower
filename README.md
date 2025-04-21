@@ -1,4 +1,4 @@
-# GitFollowers
+<img width="431" alt="Screenshot 2025-04-21 at 9 03 32 PM" src="https://github.com/user-attachments/assets/357474ce-b940-4bc5-b8d2-e1923b3a3bab" /># GitFollowers
 
 A simple iOS app to search for a GitHub user and explore their followers.
 seanallen 
@@ -25,10 +25,10 @@ seanallen
 - 🧪 add user To favorite
   
 ## 📸 Screenshots
-<img wi<img width="439" alt="Screenshot 2025-04-21 at 9 06 10 PM" src="https://github.com/user-attachments/assets/a68a8010-914e-4717-99be-4c9d6a6142e1" />
-dth="430" alt="Screenshot 2025-04-21 at 9 03 20 PM" src="https://githu<img width="446" alt="Screenshot 2025-04-21 at 9 06 16 PM" src="https://github.com/user-attachments/assets/643ac0ca-5e10-45e9-bd2e-e3e5ea2bd3fe" />
-b.com/user-attach<img width="431" alt="Screenshot 2025-04-21 at 9 06 23 PM" src="https://github.com/user-attachments/assets/f5eaaf94-d5d2-47f2-b80b-398aa0578131" />
-ments/assets/d48a8d48-fd69-4f05-93ce-36d954d48cea" />
+<img width="431" alt="Screenshot 2025-04-21 at 9 03 32 PM" src="https://github.com/user-attachments/assets/1d1730b2-76bb-4cea-a50c-4a11a85a49fa" /> <img width="439" alt="Screenshot 2025-04-21 at 9 06 10 PM" src="https://github.com/user-attachments/assets/ac15e21f-d54b-43c0-8006-17a7d87f03b1" />
+
+<img width="446" alt="Screenshot 2025-04-21 at 9 06 16 PM" src="https://github.com/user-attachments/assets/0fb150ee-fbe6-4853-ac20-610f55b4c833" /> <img width="431" alt="Screenshot 2025-04-21 at 9 06 23 PM" src="https://github.com/user-attachments/assets/3dc8d97a-35e1-42f8-8c32-4e11789ec94d" />
+
 
 ## 🛠 Technologies Used
 
