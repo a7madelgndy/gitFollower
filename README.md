@@ -25,11 +25,13 @@ seanallen
 - 🧪 add user To favorite
   
 ## 📸 Screenshots
-<img width="431" alt="Screenshot 2025-04-21 at 9 03 32 PM" src="https://github.com/user-attachments/assets/1d1730b2-76bb-4cea-a50c-4a11a85a49fa" /> <img width="439" alt="Screenshot 2025-04-21 at 9 06 10 PM" src="https://github.com/user-attachments/assets/ac15e21f-d54b-43c0-8006-17a7d87f03b1" />
-
-<img width="446" alt="Screenshot 2025-04-21 at 9 06 16 PM" src="https://github.com/user-attachments/assets/0fb150ee-fbe6-4853-ac20-610f55b4c833" /> <img width="431" alt="Screenshot 2025-04-21 at 9 06 23 PM" src="https://github.com/user-attachments/assets/3dc8d97a-35e1-42f8-8c32-4e11789ec94d" />
-
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/1d1730b2-76bb-4cea-a50c-4a11a85a49fa" width="35%" alt="Search Screen"/>
+  <img src="https://github.com/user-attachments/assets/ac15e21f-d54b-43c0-8006-17a7d87f03b1" width="35%" alt="Followers List"/>
+  <br/><br/>
+  <img src="https://github.com/user-attachments/assets/0fb150ee-fbe6-4853-ac20-610f55b4c833" width="35%" alt="User Info"/>
+  <img src="https://github.com/user-attachments/assets/3dc8d97a-35e1-42f8-8c32-4e11789ec94d" width="35%" alt="Favorites List"/>
+</div>
 ## 🛠 Technologies Used
 
 - UIKit (Programmatically)
