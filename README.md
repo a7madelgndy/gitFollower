@@ -1,4 +1,4 @@
-<img width="431" alt="Screenshot 2025-04-21 at 9 03 32 PM" src="https://github.com/user-attachments/assets/357474ce-b940-4bc5-b8d2-e1923b3a3bab" /># GitFollowers
+# GitFollowers
 
 A simple iOS app to search for a GitHub user and explore their followers.
 seanallen 
